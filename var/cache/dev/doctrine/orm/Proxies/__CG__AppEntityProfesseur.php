@@ -66,10 +66,10 @@ class Professeur extends \App\Entity\Professeur implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'avis', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'matieres'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'avis', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'matieres', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'cours'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'avis', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'matieres'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'avis', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'matieres', '' . "\0" . 'App\\Entity\\Professeur' . "\0" . 'cours'];
     }
 
     /**
@@ -343,6 +343,39 @@ class Professeur extends \App\Entity\Professeur implements \Doctrine\ORM\Proxy\P
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'jsonSerialize', []);
 
         return parent::jsonSerialize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCours(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCours', []);
+
+        return parent::getCours();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addCour(\App\Entity\Cours $cour): \App\Entity\Professeur
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCour', [$cour]);
+
+        return parent::addCour($cour);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCour(\App\Entity\Cours $cour): \App\Entity\Professeur
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCour', [$cour]);
+
+        return parent::removeCour($cour);
     }
 
 }

@@ -33,19 +33,19 @@ class Cours
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=salle::class)
+     * @ORM\ManyToOne(targetEntity=Salle::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $salle;
 
     /**
-     * @ORM\ManyToOne(targetEntity=professeur::class, inversedBy="cours")
+     * @ORM\ManyToOne(targetEntity=Professeur::class, inversedBy="cours")
      * @ORM\JoinColumn(nullable=false)
      */
     private $professeur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=matiere::class)
+     * @ORM\ManyToOne(targetEntity=Matiere::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $matiere;
