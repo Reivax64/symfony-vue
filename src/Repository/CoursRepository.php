@@ -34,6 +34,22 @@ class CoursRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin )
+    {
+        $from = new \DateTime($datedebut->format("Y-m-d")." 00:00:00");
+        $to   = new \DateTime($datefin->format("Y-m-d")." 23:59:59");
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
     // /**
     //  * @return Cours[] Returns an array of Cours objects
     //  */

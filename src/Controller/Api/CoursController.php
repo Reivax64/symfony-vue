@@ -37,4 +37,25 @@ class CoursController extends AbstractController
         return $this->json($cours,200);
 
     }
+
+    /**
+     * @Route("/between/{datedebut}/{dateend}",name="_between",methods={"GET"})
+     */
+    public function between(CoursRepository $repository,$datedebut,$dateend) :Response
+    {
+        //$date = DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
+        $datetime = new \DateTime();
+        $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
+        $end = $datetime->createFromFormat('d-m-Y', $dateend);
+
+
+        // $debut = \DateTime::createFromFormat('j-M-Y', $datedebut);
+        // $end = \DateTime::createFromFormat('j-M-Y', $dateend);
+
+
+        $cours = $repository->getByDateBetween($debut,$end);
+
+        return $this->json($cours,200);
+
+    }
 }

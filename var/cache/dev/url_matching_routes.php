@@ -18,36 +18,40 @@ return [
     [ // $regexpList
         0 => '{^(?'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:35)'
-                .'|/api/professeurs/(?'
-                    .'|([^/]++)(?'
-                        .'|(*:73)'
-                        .'|/avis(?'
-                            .'|(*:88)'
+                .'|/api/(?'
+                    .'|cours/between/([^/]++)/([^/]++)(*:81)'
+                    .'|professeurs/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:114)'
+                            .'|/avis(?'
+                                .'|(*:130)'
+                            .')'
                         .')'
-                    .')'
-                    .'|avis/([^/]++)(?'
-                        .'|(*:113)'
+                        .'|avis/([^/]++)(?'
+                            .'|(*:156)'
+                        .')'
                     .')'
                 .')'
                 .'|/professeurs/(?'
-                    .'|update/([^/]++)(*:154)'
-                    .'|delete/([^/]++)(*:177)'
+                    .'|update/([^/]++)(*:198)'
+                    .'|delete/([^/]++)(*:221)'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         35 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        73 => [[['_route' => 'api_professeurs_show', '_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
-        88 => [
+        81 => [[['_route' => 'api_cours__between', '_controller' => 'App\\Controller\\Api\\CoursController::between'], ['datedebut', 'dateend'], ['GET' => 0], null, false, true, null]],
+        114 => [[['_route' => 'api_professeurs_show', '_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
+        130 => [
             [['_route' => 'api_professeurs_index_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::indexAvis'], ['id'], ['GET' => 0], null, false, false, null],
             [['_route' => 'api_professeurs_create_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::createAvis'], ['id'], ['POST' => 0], null, false, false, null],
         ],
-        113 => [
+        156 => [
             [['_route' => 'api_professeurs_delete_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::deleteAvis'], ['id'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_professeurs_update_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::updateAvis'], ['id'], ['PATCH' => 0], null, false, true, null],
         ],
-        154 => [[['_route' => 'professeurs_update', '_controller' => 'App\\Controller\\ProfesseurController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        177 => [
+        198 => [[['_route' => 'professeurs_update', '_controller' => 'App\\Controller\\ProfesseurController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        221 => [
             [['_route' => 'professeurs_delete', '_controller' => 'App\\Controller\\ProfesseurController::delete'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

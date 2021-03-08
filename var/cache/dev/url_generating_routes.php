@@ -7,6 +7,7 @@ return [
     'admin' => [[], ['_controller' => 'App\\Controller\\Admin\\DashboardController::index'], [], [['text', '/admin']], [], []],
     'api_cours_index' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::index'], [], [['text', '/api/cours']], [], []],
     'api_cours__today' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::today'], [], [['text', '/api/cours/today']], [], []],
+    'api_cours__between' => [['datedebut', 'dateend'], ['_controller' => 'App\\Controller\\Api\\CoursController::between'], [], [['variable', '/', '[^/]++', 'dateend', true], ['variable', '/', '[^/]++', 'datedebut', true], ['text', '/api/cours/between']], [], []],
     'api_professeurs_index' => [[], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], [], [['text', '/api/professeurs']], [], []],
     'api_professeurs_show' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],
     'api_professeurs_index_avis' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::indexAvis'], [], [['text', '/avis'], ['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],
