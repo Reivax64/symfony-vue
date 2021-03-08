@@ -63,7 +63,7 @@ class CoursController extends AbstractController
     /**
      * @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
      */
-    public function addDays(CoursRepository $repository,string $nb_add_days) :Response
+    public function addDays(CoursRepository $repository,int $nb_add_days) :Response
     {
         $datetime = new \DateTime();
         $date = $datetime->modify('+'.$nb_add_days.' day');
