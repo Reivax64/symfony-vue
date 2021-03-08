@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=SalleRepository::class)
  */
-class Salle
+class Salle implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -43,5 +43,13 @@ class Salle
     public function __toString()
     {
         return $this->numero;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'numero' => $this->numero,
+        ];
     }
 }

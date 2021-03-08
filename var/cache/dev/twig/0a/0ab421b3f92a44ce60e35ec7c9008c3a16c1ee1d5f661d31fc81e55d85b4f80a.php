@@ -91,6 +91,6 @@ class __TwigTemplate_3620739a14b95309b71507ab272abedbf96204032b2b679e8059a7ef889
 <div id=\"{{ html_id }}\" class=\"ea-lightbox\">
     <img src=\"{{ asset(field.formattedValue) }}\">
 </div>
-", "@EasyAdmin/crud/field/image.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\edt\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\field\\image.html.twig");
+", "@EasyAdmin/crud/field/image.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\symfony-vue\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\field\\image.html.twig");
     }
 }

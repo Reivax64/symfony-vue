@@ -97,6 +97,6 @@ class __TwigTemplate_c2f4d2ecd05d85c23418bf525e7852659a4db743399153a7a11b186a5ec
         {{ render_as_html ? field.formattedValue|raw : field.formattedValue|striptags }}
     </span>
 {% endif %}
-", "@EasyAdmin/crud/field/text.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\edt\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\field\\text.html.twig");
+", "@EasyAdmin/crud/field/text.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\symfony-vue\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\field\\text.html.twig");
     }
 }

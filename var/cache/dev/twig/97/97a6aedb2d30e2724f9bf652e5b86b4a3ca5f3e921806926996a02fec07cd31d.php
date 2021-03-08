@@ -89,6 +89,6 @@ class __TwigTemplate_c690b3a7e6824c4753dd0493c0e5db3ff88c013a5d65d9c18776fb84aaf
 {% if ea_select2_locale != 'en' %}
     <script src=\"{{ asset('bundles/easyadmin/select2/i18n/' ~ ea_select2_locale ~ '.js') }}\"></script>
 {% endif %}
-", "@EasyAdmin/crud/includes/_select2_widget.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\edt\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\includes\\_select2_widget.html.twig");
+", "@EasyAdmin/crud/includes/_select2_widget.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\symfony-vue\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\crud\\includes\\_select2_widget.html.twig");
     }
 }

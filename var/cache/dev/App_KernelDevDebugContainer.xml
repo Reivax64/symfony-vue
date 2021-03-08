@@ -5,8 +5,8 @@
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev</parameter>
-    <parameter key="kernel.cache_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev</parameter>
+    <parameter key="kernel.build_dir">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev</parameter>
+    <parameter key="kernel.cache_dir">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev</parameter>
     <parameter key="kernel.logs_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
@@ -99,19 +99,19 @@
       <parameter key="cookie_samesite">lax</parameter>
       <parameter key="gc_probability">1</parameter>
     </parameter>
-    <parameter key="session.save_path">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/sessions</parameter>
+    <parameter key="session.save_path">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/sessions</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
-    <parameter key="validator.mapping.cache.file">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="translator.logging">false</parameter>
     <parameter key="translator.default_path">C:\Users\ralbanes\Desktop\cours\web\symfony-vue/translations</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
@@ -190,7 +190,7 @@
     <parameter key="doctrine.orm.second_level_cache.cache_configuration.class">Doctrine\ORM\Cache\CacheConfiguration</parameter>
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
-    <parameter key="doctrine.orm.proxy_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -264,6 +264,13 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.7Gh9pQb.App\Controller\Admin\SalleCrudController"/>
+      </call>
+    </service>
+    <service id="App\Controller\Api\CoursController" class="App\Controller\Api\CoursController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Api\CoursController"/>
       </call>
     </service>
     <service id="App\Controller\Api\ProfesseurController" class="App\Controller\Api\ProfesseurController" public="true" autowire="true" autoconfigure="true">
@@ -368,7 +375,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/http_cache</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -378,7 +385,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer" public="true">
       <tag name="container.private" package="symfony/framework-bundle" version="5.2"/>
@@ -842,7 +849,7 @@
       <tag name="kernel.reset" method="reset"/>
       <argument>FEz3-gWUsp</argument>
       <argument>0</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -857,7 +864,7 @@
       <argument>DP0MzsRHGf</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -867,7 +874,7 @@
       <argument>cTIa+lCc7q</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -877,7 +884,7 @@
       <argument>KVsseSY7iB</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -887,7 +894,7 @@
       <argument>Zt73sQD0Vf</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -897,7 +904,7 @@
       <argument>aHcbEtRXvG</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -907,7 +914,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -936,7 +943,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
@@ -1088,14 +1095,14 @@
       <deprecated package="symfony/framework-bundle" version="5.1">The "%service_id%" service is deprecated, use "$session-&gt;getAttributeBag()" instead.</deprecated>
     </service>
     <service id="session.storage.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/sessions</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service" id="session.storage.metadata_bag"/>
     </service>
     <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler">
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler">
-          <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/sessions</argument>
+          <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/sessions</argument>
         </service>
       </argument>
     </service>
@@ -1186,6 +1193,7 @@
     <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType">
       <tag name="form.type"/>
       <argument type="service" id="form.choice_list_factory.cached"/>
+      <argument type="service" id="translator.default" on-invalid="ignore"/>
     </service>
     <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType" public="true">
       <tag name="form.type"/>
@@ -1328,10 +1336,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/validation.php</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -1402,302 +1410,303 @@
         </argument>
       </argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/translations</argument>
+        <argument key="cache_dir">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
-          <argument key="ar" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ar.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
-          </argument>
-          <argument key="bg" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.bg.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
-          </argument>
-          <argument key="ca" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ca.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
-          </argument>
-          <argument key="cs" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.cs.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
-          </argument>
-          <argument key="da" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.da.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
-          </argument>
-          <argument key="de" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.de.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
-          </argument>
-          <argument key="el" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.el.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
-          </argument>
-          <argument key="en" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.en.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
-          </argument>
-          <argument key="es" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.es.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
-          </argument>
-          <argument key="eu" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.eu.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
-          </argument>
-          <argument key="fa" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fa.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
-          </argument>
-          <argument key="fi" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fi.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
-          </argument>
-          <argument key="fr" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fr.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
-          </argument>
-          <argument key="gl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.gl.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
-          </argument>
-          <argument key="hr" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hr.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hr.xlf</argument>
-          </argument>
-          <argument key="hu" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hu.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
-          </argument>
-          <argument key="it" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.it.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
-          </argument>
-          <argument key="lt" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.lt.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
-          </argument>
-          <argument key="nl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.nl.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
-          </argument>
-          <argument key="no" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.no.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.no.xlf</argument>
-          </argument>
-          <argument key="pl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pl.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
-          </argument>
-          <argument key="pt" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
-          </argument>
-          <argument key="pt_BR" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt_BR.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
-          </argument>
-          <argument key="ro" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ro.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
-          </argument>
-          <argument key="ru" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ru.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
-          </argument>
-          <argument key="sl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sl.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
-          </argument>
-          <argument key="sr_RS" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sr_RS.php</argument>
-          </argument>
-          <argument key="sv" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sv.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
-          </argument>
-          <argument key="tr" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.tr.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
-          </argument>
-          <argument key="uk" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.uk.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
-          </argument>
-          <argument key="zh_CN" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.zh_CN.php</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.zh_CN.xlf</argument>
-          </argument>
           <argument key="af" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
+          </argument>
+          <argument key="ar" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ar.php</argument>
           </argument>
           <argument key="az" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.az.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.az.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
           </argument>
           <argument key="be" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.be.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.be.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.be.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.be.xlf</argument>
+          </argument>
+          <argument key="bg" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.bg.php</argument>
           </argument>
           <argument key="bs" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.bs.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.bs.xlf</argument>
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.bs.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.bs.xlf</argument>
           </argument>
-          <argument key="et" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
+          <argument key="ca" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ca.php</argument>
           </argument>
-          <argument key="he" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.he.xlf</argument>
-          </argument>
-          <argument key="hy" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hy.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
-          </argument>
-          <argument key="id" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
-          </argument>
-          <argument key="ja" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
-          </argument>
-          <argument key="lb" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
-          </argument>
-          <argument key="lv" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
-          </argument>
-          <argument key="mn" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
-          </argument>
-          <argument key="nb" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
-          </argument>
-          <argument key="nn" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
-          </argument>
-          <argument key="sk" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
-          </argument>
-          <argument key="sq" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sq.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sq.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sq.xlf</argument>
-          </argument>
-          <argument key="sr_Cyrl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sr_Cyrl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sr_Cyrl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sr_Cyrl.xlf</argument>
-          </argument>
-          <argument key="sr_Latn" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sr_Latn.xlf</argument>
-          </argument>
-          <argument key="th" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
-          </argument>
-          <argument key="tl" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.tl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.tl.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.tl.xlf</argument>
-          </argument>
-          <argument key="vi" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
-          </argument>
-          <argument key="zh_TW" type="collection">
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
-            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.zh_TW.xlf</argument>
+          <argument key="cs" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.cs.php</argument>
           </argument>
           <argument key="cy" type="collection">
             <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.cy.xlf</argument>
+          </argument>
+          <argument key="da" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.da.php</argument>
+          </argument>
+          <argument key="de" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.de.php</argument>
+          </argument>
+          <argument key="el" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.el.php</argument>
+          </argument>
+          <argument key="en" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.en.php</argument>
+          </argument>
+          <argument key="es" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.es.php</argument>
+          </argument>
+          <argument key="et" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
+          </argument>
+          <argument key="eu" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.eu.php</argument>
+          </argument>
+          <argument key="fa" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fa.php</argument>
+          </argument>
+          <argument key="fi" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fi.php</argument>
+          </argument>
+          <argument key="fr" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fr.php</argument>
+          </argument>
+          <argument key="gl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.gl.php</argument>
+          </argument>
+          <argument key="he" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
+          </argument>
+          <argument key="hr" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hr.php</argument>
+          </argument>
+          <argument key="hu" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hu.php</argument>
+          </argument>
+          <argument key="hy" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.hy.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.hy.xlf</argument>
+          </argument>
+          <argument key="id" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
+          </argument>
+          <argument key="it" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.it.php</argument>
+          </argument>
+          <argument key="ja" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
+          </argument>
+          <argument key="lb" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
+          </argument>
+          <argument key="lt" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.lt.php</argument>
+          </argument>
+          <argument key="lv" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
+          </argument>
+          <argument key="mn" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
+          </argument>
+          <argument key="nb" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
+          </argument>
+          <argument key="nl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.nl.php</argument>
+          </argument>
+          <argument key="nn" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.nn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.nn.xlf</argument>
+          </argument>
+          <argument key="no" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.no.php</argument>
+          </argument>
+          <argument key="pl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pl.php</argument>
+          </argument>
+          <argument key="pt" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt.php</argument>
+          </argument>
+          <argument key="pt_BR" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt_BR.php</argument>
+          </argument>
+          <argument key="ro" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ro.php</argument>
+          </argument>
+          <argument key="ru" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ru.php</argument>
+          </argument>
+          <argument key="sk" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
+          </argument>
+          <argument key="sl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sl.php</argument>
+          </argument>
+          <argument key="sq" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sq.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sq.xlf</argument>
+          </argument>
+          <argument key="sr_Cyrl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sr_Cyrl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sr_Cyrl.xlf</argument>
+          </argument>
+          <argument key="sr_Latn" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
+          </argument>
+          <argument key="sv" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sv.php</argument>
+          </argument>
+          <argument key="th" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
+          </argument>
+          <argument key="tl" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.tl.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.tl.xlf</argument>
+          </argument>
+          <argument key="tr" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.tr.php</argument>
+          </argument>
+          <argument key="uk" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.uk.php</argument>
+          </argument>
+          <argument key="vi" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
+          </argument>
+          <argument key="zh_CN" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.zh_CN.php</argument>
+          </argument>
+          <argument key="zh_TW" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\validator/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
+          </argument>
+          <argument key="sr_RS" type="collection">
+            <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sr_RS.php</argument>
           </argument>
         </argument>
         <argument key="scanned_directories" type="collection">
@@ -2400,7 +2409,7 @@
       <argument type="service" id=".service_locator.WOytlHA.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev</argument>
+        <argument key="cache_dir">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -2487,25 +2496,35 @@
       <tag name="annotations.cached_reader"/>
       <argument type="service" id="annotations.reader"/>
       <argument type="service">
-        <service class="Doctrine\Common\Cache\ArrayCache"/>
+        <service class="Symfony\Component\Cache\DoctrineProvider">
+          <argument type="service">
+            <service class="Symfony\Component\Cache\Adapter\ArrayAdapter"/>
+          </argument>
+        </service>
       </argument>
       <argument>true</argument>
       <property name="cacheProviderBackup" type="service" id="annotations.cache"/>
     </service>
-    <service id="annotations.filesystem_cache" class="Doctrine\Common\Cache\FilesystemCache">
+    <service id="annotations.filesystem_cache_adapter" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
+      <argument></argument>
+      <argument>0</argument>
       <argument type="abstract">Cache-Directory</argument>
+    </service>
+    <service id="annotations.filesystem_cache" class="Symfony\Component\Cache\DoctrineProvider">
+      <argument type="service" id="annotations.filesystem_cache_adapter"/>
     </service>
     <service id="annotations.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="annotations.reader"/>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/annotations.php</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/annotations.php</argument>
       <argument>#^Symfony\\(?:Component\\HttpKernel\\|Bundle\\FrameworkBundle\\Controller\\(?!.*Controller$))#</argument>
       <argument>true</argument>
     </service>
     <service id="annotations.cache" class="Symfony\Component\Cache\DoctrineProvider">
+      <tag name="container.hot_path"/>
       <argument type="service">
         <service class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
-          <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/annotations.php</argument>
+          <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/annotations.php</argument>
           <argument type="service" id="cache.annotations"/>
           <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
         </service>
@@ -3023,7 +3042,7 @@
         <argument type="service" id="doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/doctrine/orm/Proxies</argument>
+        <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -3335,7 +3354,7 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
-        <argument key="cache">C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/twig</argument>
+        <argument key="cache">C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -3712,7 +3731,7 @@
       <argument>mF8qmTbS20</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev/pools</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -4228,7 +4247,7 @@
       <argument type="service" id="twig"/>
     </service>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Factory\AdminContextFactory" class="EasyCorp\Bundle\EasyAdminBundle\Factory\AdminContextFactory">
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev</argument>
       <argument type="service" id="translator.default"/>
       <argument type="service" id="security.token_storage" on-invalid="null"/>
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Factory\MenuFactory"/>
@@ -4474,6 +4493,9 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\SalleCrudController" class="App\Controller\Admin\SalleCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface.0.App\Controller\Admin\SalleCrudController" class="App\Controller\Admin\SalleCrudController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\SalleCrudController" class="App\Controller\Admin\SalleCrudController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Api\CoursController" class="App\Controller\Api\CoursController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Api\CoursController" class="App\Controller\Api\CoursController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Api\CoursController" class="App\Controller\Api\CoursController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Api\ProfesseurController" class="App\Controller\Api\ProfesseurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Api\ProfesseurController" class="App\Controller\Api\ProfesseurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Api\ProfesseurController" class="App\Controller\Api\ProfesseurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4941,6 +4963,12 @@
         <argument key="user" type="service" id=".errored..service_locator.q6hA_O0.Symfony\Component\Security\Core\User\UserInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.e1La3as" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service" id="App\Repository\CoursRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.JYCLLoW" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4977,7 +5005,7 @@
         <argument key="professeur" type="service" id=".errored..service_locator..ewpm5Q.App\Entity\Professeur"/>
       </argument>
     </service>
-    <service id=".service_locator.eQzcwUo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.1lYG2Z7" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AvisCrudController::autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
@@ -5081,6 +5109,7 @@
         <argument key="App\Controller\Admin\SalleCrudController::persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\SalleCrudController::renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\SalleCrudController::updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Api\CoursController::index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\ProfesseurController::createAvis" type="service" id=".service_locator.B3GXs3X"/>
         <argument key="App\Controller\Api\ProfesseurController::deleteAvis" type="service" id=".service_locator.lYmC.Fc"/>
         <argument key="App\Controller\Api\ProfesseurController::detail" type="service" id=".service_locator.JYCLLoW"/>
@@ -5196,6 +5225,7 @@
         <argument key="App\Controller\Admin\SalleCrudController:persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\SalleCrudController:renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\SalleCrudController:updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Api\CoursController:index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\ProfesseurController:createAvis" type="service" id=".service_locator.B3GXs3X"/>
         <argument key="App\Controller\Api\ProfesseurController:deleteAvis" type="service" id=".service_locator.lYmC.Fc"/>
         <argument key="App\Controller\Api\ProfesseurController:detail" type="service" id=".service_locator.JYCLLoW"/>
@@ -5326,7 +5356,7 @@
     </service>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Registry\DashboardControllerRegistry" class="EasyCorp\Bundle\EasyAdminBundle\Registry\DashboardControllerRegistry">
       <argument>%env(APP_SECRET)%</argument>
-      <argument>C:\Users\ralbanes\Desktop\cours\web\symfony-vue\var\cache\dev</argument>
+      <argument>C:/Users/ralbanes/Desktop/cours/web/symfony-vue/var/cache/dev</argument>
       <argument type="collection">
         <argument>App\Controller\Admin\DashboardController</argument>
       </argument>
@@ -5456,6 +5486,12 @@
         <argument key="session" type="service" id="session" on-invalid="ignore"/>
         <argument key="twig" type="service" id="twig" on-invalid="ignore"/>
       </argument>
+    </service>
+    <service id=".service_locator.5nX7ca3.App\Controller\Api\CoursController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Api\CoursController"/>
+      <argument>App\Controller\Api\CoursController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.5nX7ca3" method="withContext"/>
     </service>
     <service id=".service_locator.5nX7ca3.App\Controller\Api\ProfesseurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Api\ProfesseurController"/>
@@ -5603,12 +5639,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.eQzcwUo"/>
+      <argument type="service" id=".service_locator.1lYG2Z7"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.eQzcwUo"/>
+      <argument type="service" id=".service_locator.1lYG2Z7"/>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
     <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
@@ -5938,7 +5974,7 @@
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.eQzcwUo"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.1lYG2Z7"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.Mo0FXEU" alias="service_locator_EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>

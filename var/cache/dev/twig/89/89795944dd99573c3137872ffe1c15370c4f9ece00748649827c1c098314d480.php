@@ -367,6 +367,6 @@ class __TwigTemplate_35c9d9f67960a93a5e271ee5f5c325931b01f13b745ddc5892c52159140
 </ul>
 
 {% block main_menu_after %}{% endblock %}
-", "@EasyAdmin/menu.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\edt\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\menu.html.twig");
+", "@EasyAdmin/menu.html.twig", "C:\\Users\\ralbanes\\Desktop\\cours\\web\\symfony-vue\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\menu.html.twig");
     }
 }

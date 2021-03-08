@@ -5,6 +5,7 @@
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
     'admin' => [[], ['_controller' => 'App\\Controller\\Admin\\DashboardController::index'], [], [['text', '/admin']], [], []],
+    'api_cours_index' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::index'], [], [['text', '/api/cours']], [], []],
     'api_professeurs_index' => [[], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], [], [['text', '/api/professeurs']], [], []],
     'api_professeurs_show' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],
     'api_professeurs_index_avis' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::indexAvis'], [], [['text', '/avis'], ['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],

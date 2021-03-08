@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\CoursRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CoursRepository::class)
  */
-class Cours
+class Cours implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -125,5 +127,22 @@ class Cours
         $this->matiere = $matiere;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->DateHeureDebut + " " + $this->DateHeureFin;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'dateHeureDebut' => $this->dateHeureDebut,
+            'dateHeureFin' => $this->dateHeureFin,
+            "professeur" => $this->professeur,
+            "matiere" => $this->matiere,
+            "salle" => $this->salle,
+        ];
     }
 }
