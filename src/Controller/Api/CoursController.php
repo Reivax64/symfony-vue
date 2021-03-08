@@ -49,11 +49,27 @@ class CoursController extends AbstractController
         $end = $datetime->createFromFormat('d-m-Y', $dateend);
 
 
+        //$end2 = $end->modify('+1 day');
         // $debut = \DateTime::createFromFormat('j-M-Y', $datedebut);
         // $end = \DateTime::createFromFormat('j-M-Y', $dateend);
 
 
         $cours = $repository->getByDateBetween($debut,$end);
+
+        return $this->json($cours,200);
+
+    }
+
+    /**
+     * @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
+     */
+    public function addDays(CoursRepository $repository,string $nb_add_days) :Response
+    {
+        $datetime = new \DateTime();
+        $date = $datetime->modify('+'.$nb_add_days.' day');
+
+        $cours = $repository->getByDate($date);
+
 
         return $this->json($cours,200);
 
