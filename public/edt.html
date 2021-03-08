@@ -3,6 +3,10 @@
     <head>
         <title>Note ton prof</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     </head>
     <body>
         <div id="App" class="container">
@@ -13,7 +17,7 @@
                         <div class="col-6" v-for="professeur in professeurs">
                             <div class="card">
                                 <div class="card-body" :class="{'bg-secondary' : professeur.id == professeurSelected?.id}">
-                                    <h5 class="card-title">{{ professeur.prenom + '' + professeur.nom }}</h5>
+                                    <h5 class="card-title">{{ fullName(professeur) }}</h5>
                                     <p class="card-text">{{ professeur.email }}
                                         <span v-for="matiere in professeur.matieres">
                                             {{ matiere.titre }} ({{ matiere.reference}})
@@ -64,25 +68,48 @@
                         </div>
                     </div>
                 </div>
+                <v-calendar></v-calendar>
             </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.2.4/lib/v-calendar.umd.min.js" integrity="sha256-1qsBxPpY5MJfDT/s2X3mV1sZnxBUQ9w9QjmscvNsEBo=" crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
         <script>
             var app = new Vue({
                 el:"#App",
+                vuetify: new Vuetify(),
+                components: {
+                    // VCalendar
+                },
                 data:{
-                    apiBase:"http://localhost:8022/api",
-                    professeurs:[],
-                    professeurSelected:null,
-                    avis:[],
-                    nouvelleAvis:{},
-                    errors : [],
+                    attrs: [
+                        {
+                        key: 'today',
+                        highlight: "red",
+                        dates: new Date(),
+                        },
+                    ],
+                    professeurs: [],
+                    professeurSelected: null,
+                    avis: [],
+                    nouvelleAvis: {},
+                    errors: [],
+                },
+                mounted(){
+                    this.getProfesseurs()
+                    console.log(Vue)
                 },
                 methods:{
+                    fullName(professeur) {
+                        return professeur.prenom + " "+ professeur.nom
+                    },
                     getProfesseurs: function(){
-                        axios.get(this.apiBase + "/professeurs")
+                        axios.get("/api/professeurs")
                         .then(response => {
                             this.professeurs = response.data
                         })
@@ -96,7 +123,7 @@
 
                         this.nouvelleAvis = this.newAvis();
 
-                        axios.get(this.apiBase + "/professeurs/"+professeur.id+"/avis")
+                        axios.get("/api/professeurs/"+professeur.id+"/avis")
                         .then(response => {
                             this.avis = response.data
                             this.professeurSelected = professeur
@@ -108,7 +135,7 @@
                     },
                     postAvis: function(){
                         this.errors = [];
-                        axios.post(this.apiBase + "/professeurs/"+this.professeurSelected.id+"/avis",this.nouvelleAvis)
+                        axios.post("/api/professeurs/"+this.professeurSelected.id+"/avis",this.nouvelleAvis)
                         .then(response => {
                             this.avis.push(response.data);
                             this.nouvelleAvis = this.newAvis();
@@ -120,15 +147,12 @@
                     },
                     newAvis: function(){
                         return {
-                            "note":0,
-                            "commentaire":"",
-                            "emailEtudiant":"",
+                            note: 0,
+                            commentaire: "",
+                            emailEtudiant: "",
                         }
                     }
                 },
-                mounted(){
-                    this.getProfesseurs()
-                }
             });
         </script>
     </body>
