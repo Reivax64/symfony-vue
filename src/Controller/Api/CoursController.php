@@ -24,4 +24,17 @@ class CoursController extends AbstractController
         return $this->json($cours,200);
 
     }
+
+    /**
+     * @Route("/today",name="_today",methods={"GET"})
+     */
+    public function today(CoursRepository $repository) :Response
+    {
+        $now = new \DateTime();
+
+        $cours = $repository->getByDate($now);
+
+        return $this->json($cours,200);
+
+    }
 }

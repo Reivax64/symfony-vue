@@ -6,7 +6,7 @@ use App\Repository\CoursRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CoursRepository::class)
  */
@@ -26,6 +26,7 @@ class Cours implements \JsonSerializable
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan(propertyPath="dateHeureDebut", message="La date de fin ne peut pas être inférieure à la date de début")
      */
     private $dateHeureFin;
 
@@ -138,8 +139,8 @@ class Cours implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'dateHeureDebut' => $this->dateHeureDebut,
-            'dateHeureFin' => $this->dateHeureFin,
+            'dateHeureDebut' => $this->dateHeureDebut->format("d-m-Y H:i:s"),
+            'dateHeureFin' => $this->dateHeureFin->format("d-m-Y H:i:s"),
             "professeur" => $this->professeur,
             "matiere" => $this->matiere,
             "salle" => $this->salle,
