@@ -9,9 +9,9 @@ return [
     false, // $matchHost
     [ // $staticRoutes
         '/admin' => [[['_route' => 'admin', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
-        '/api/cours' => [[['_route' => 'api_cours_index', '_controller' => 'App\\Controller\\Api\\CoursController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/cours/today' => [[['_route' => 'api_cours__today', '_controller' => 'App\\Controller\\Api\\CoursController::today'], null, ['GET' => 0], null, false, false, null]],
         '/api/professeurs' => [[['_route' => 'api_professeurs_index', '_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/api/salles' => [[['_route' => 'api_cours_index', '_controller' => 'App\\Controller\\Api\\SalleController::index'], null, ['GET' => 0], null, false, false, null]],
         '/professeurs' => [[['_route' => 'professeurs_index', '_controller' => 'App\\Controller\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/professeurs/create' => [[['_route' => 'professeurs_create', '_controller' => 'App\\Controller\\ProfesseurController::create'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
     ],
@@ -34,10 +34,11 @@ return [
                             .'|(*:181)'
                         .')'
                     .')'
+                    .'|salles/([^/]++)(*:206)'
                 .')'
                 .'|/professeurs/(?'
-                    .'|update/([^/]++)(*:223)'
-                    .'|delete/([^/]++)(*:246)'
+                    .'|update/([^/]++)(*:246)'
+                    .'|delete/([^/]++)(*:269)'
                 .')'
             .')/?$}sDu',
     ],
@@ -54,8 +55,9 @@ return [
             [['_route' => 'api_professeurs_delete_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::deleteAvis'], ['id'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_professeurs_update_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::updateAvis'], ['id'], ['PATCH' => 0], null, false, true, null],
         ],
-        223 => [[['_route' => 'professeurs_update', '_controller' => 'App\\Controller\\ProfesseurController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        246 => [
+        206 => [[['_route' => 'api_cours_detail', '_controller' => 'App\\Controller\\Api\\SalleController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
+        246 => [[['_route' => 'professeurs_update', '_controller' => 'App\\Controller\\ProfesseurController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        269 => [
             [['_route' => 'professeurs_delete', '_controller' => 'App\\Controller\\ProfesseurController::delete'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
