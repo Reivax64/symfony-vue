@@ -147,6 +147,7 @@ class Cours implements \JsonSerializable
             'dateHeureDebut' => $this->dateHeureDebut->format("d-m-Y H:i:s"),
             'dateHeureFin' => $this->dateHeureFin->format("d-m-Y H:i:s"),
             "professeur" => $this->professeur,
+            "type" => $this->type,
             "matiere" => $this->matiere,
             "salle" => $this->salle,
         ];
