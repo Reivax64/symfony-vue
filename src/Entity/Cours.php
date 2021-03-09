@@ -7,8 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\CoursValidator as c_validator_; 
+use App\Validator\Cours as c_validator; 
+
+
 /**
  * @ORM\Entity(repositoryClass=CoursRepository::class)
+ * @c_validator
  */
 class Cours implements \JsonSerializable
 {
@@ -146,4 +151,7 @@ class Cours implements \JsonSerializable
             "salle" => $this->salle,
         ];
     }
+    
 }
+
+

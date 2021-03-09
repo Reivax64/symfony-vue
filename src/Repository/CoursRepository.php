@@ -35,7 +35,7 @@ class CoursRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin )
+    public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin)
     {
         $from = new \DateTime($datedebut->format("Y-m-d")." 00:00:00");
         $to   = new \DateTime($datefin->format("Y-m-d")." 23:59:59");
@@ -43,6 +43,23 @@ class CoursRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder("e");
         $qb
             ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function getInSameCreneau(\Datetime $datedebut,\Datetime $datefin)
+    {
+        $from = new \DateTime($datedebut->format("Y-m-d H:i:s"));
+        $to   = new \DateTime($datefin->format("Y-m-d H:i:s"));
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->orWhere('e.dateHeureFin BETWEEN :from AND :to')
             ->setParameter('from', $from )
             ->setParameter('to', $to)
         ;
