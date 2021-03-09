@@ -224,6 +224,7 @@ $classes[] = 'App\Repository\CoursRepository';
 $classes[] = 'App\Repository\MatiereRepository';
 $classes[] = 'App\Repository\ProfesseurRepository';
 $classes[] = 'App\Repository\SalleRepository';
+$classes[] = 'App\Validator\CoursValidator';
 $classes[] = 'EasyCorp\Bundle\EasyAdminBundle\EventListener\AdminRouterSubscriber';
 $classes[] = 'EasyCorp\Bundle\EasyAdminBundle\Factory\AdminContextFactory';
 $classes[] = 'EasyCorp\Bundle\EasyAdminBundle\Factory\MenuFactory';

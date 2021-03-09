@@ -313,6 +313,11 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Validator\Cours" class="App\Validator\Cours" autowire="true" autoconfigure="true"/>
+    <service id="App\Validator\CoursValidator" class="App\Validator\CoursValidator" autowire="true" autoconfigure="true">
+      <tag name="validator.constraint_validator"/>
+      <argument type="service" id="App\Repository\CoursRepository"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -1344,7 +1349,7 @@
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
-      <argument type="service" id=".service_locator.anofQPJ"/>
+      <argument type="service" id=".service_locator.0SesU.J"/>
     </service>
     <service id="validator.expression" class="Symfony\Component\Validator\Constraints\ExpressionValidator">
       <tag name="validator.constraint_validator" alias="validator.expression"/>
@@ -4516,6 +4521,8 @@
     <service id=".abstract.instanceof.App\Repository\ProfesseurRepository" class="App\Repository\ProfesseurRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SalleRepository" class="App\Repository\SalleRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\SalleRepository" class="App\Repository\SalleRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Validator\ConstraintValidatorInterface.0.App\Validator\CoursValidator" class="App\Validator\CoursValidator" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Validator\CoursValidator" class="App\Validator\CoursValidator" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Filter\FilterConfiguratorInterface.0.EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\ChoiceConfigurator" class="EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\ChoiceConfigurator" abstract="true"/>
     <service id=".abstract.instanceof.EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\ChoiceConfigurator" class="EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\ChoiceConfigurator" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Filter\FilterConfiguratorInterface.0.EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\CommonConfigurator" class="EasyCorp\Bundle\EasyAdminBundle\Filter\Configurator\CommonConfigurator" abstract="true"/>
@@ -5245,9 +5252,10 @@
         <argument key="kernel:terminate" type="service" id=".service_locator.KfwZsne"/>
       </argument>
     </service>
-    <service id=".service_locator.anofQPJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0SesU.J" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Validator\CoursValidator" type="service" id="App\Validator\CoursValidator"/>
         <argument key="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator" type="service" id="doctrine.orm.validator.unique"/>
         <argument key="Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator" type="service" id="security.validator.user_password"/>
         <argument key="Symfony\Component\Validator\Constraints\EmailValidator" type="service" id="validator.email"/>
@@ -5984,7 +5992,7 @@
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.Mo0FXEU" alias="service_locator_EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
-    <service id=".service_locator.wKF4yn1" alias=".service_locator.anofQPJ"/>
+    <service id=".service_locator.kEoVo6U" alias=".service_locator.0SesU.J"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
     <service id="controller_resolver" alias="debug.controller_resolver"/>
     <service id="argument_resolver" alias="debug.argument_resolver"/>
