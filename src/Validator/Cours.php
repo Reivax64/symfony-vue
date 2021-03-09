@@ -17,7 +17,8 @@ class Cours extends Constraint
     public $messageErrTeach = 'Le professeur ne peut pas enseigner cette matière';
     public $messageSalleDejaPrise = 'Cette salle est déjà prise';
     public $messageProfDejaPris = 'Ce prof est déjà prise';
-    
+    public $messageDayDifferent = 'Un cours ne peux pas être sur plusieurs jours';
+
 
     
     public function validatedBy()
