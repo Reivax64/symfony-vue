@@ -10,70 +10,34 @@
     </head>
     <body>
         <div id="App" class="container">
-            <v-row class="fill-height">
-                    <v-col>
-                        <v-sheet height="64">
-                        <v-toolbar
-                            flat
-                        >
-                            <v-btn
-                                outlined
-                                class="mr-4"
-                                color="grey darken-2"
-                                @click="setToday"
-                            >Aujourd'hui</v-btn>
-                            <v-btn
-                                fab
-                                text
-                                small
-                                color="grey darken-2"
-                                @click="prev"
-                            >
-                                <v-icon small>
-                                    mdi-chevron-left
-                                </v-icon>
-                            </v-btn>
-                            <v-btn
-                                fab
-                                text
-                                small
-                                color="grey darken-2"
-                                @click="next"
-                            >
-                                <v-icon small>
-                                    mdi-chevron-right
-                                </v-icon>
-                            </v-btn>
-                            <v-toolbar-title v-if="$refs.calendar">
-                                {{ $refs.calendar.title }}
-                            </v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-menu
-                                bottom
-                                right
-                            >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-btn
-                                    outlined
-                                    color="grey darken-2"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                    >
-                                    <span>{{ typeSelected.name }}</span>
-                                    <v-icon right>
-                                        mdi-menu-down
-                                    </v-icon>
-                                    </v-btn>
-                                </template>
-                                <v-list>
-                                    <v-list-item v-for="type in types" :key="type.key" @click="typeSelected = type">
-                                        <v-list-item-title>{{ type.name }}</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-                        </v-toolbar>
-                        </v-sheet>
-                        <v-sheet height="600">
+            <div class="row fill-height">
+                <div class="col">
+                    <div class="d-flex">
+                        <button @click="setToday" class="mr-4 btn btn-outline-primary">Aujourd'hui</button>
+                        <button @click="prev" type="button" class="btn btn-default" aria-label="Left Align">
+                            <v-icon small>mdi-chevron-left</v-icon>
+                        </button>
+                        <button @click="next" type="button" class="btn btn-default" aria-label="Left Align">
+                            <v-icon small>mdi-chevron-right</v-icon>
+                        </button>
+                        <div v-if="$refs.calendar">
+                            {{ $refs.calendar.title }}
+                        </div>
+                        <div class="ml-auto btn-group">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ typeSelected.name }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button 
+                                    v-for="type in types" :key="type.key" 
+                                    @click="typeSelected = type" 
+                                    class="dropdown-item" type="button"
+                                >{{ type.name }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <v-sheet height="600">
                         <v-calendar
                             ref="calendar"
                             v-model="focus"
@@ -116,9 +80,9 @@
                             </v-card-actions>
                             </v-card>
                         </v-menu>
-                        </v-sheet>
-                    </v-col>
-                    </v-row>
+                    </v-sheet>
+                </div>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
@@ -143,7 +107,7 @@
                     selectedOpen: false,
                     events: [],
                     colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-                    names: [],
+                    names: ["Evenement"],
                 },
 
                 mounted(){
@@ -169,18 +133,18 @@
                     },
                     showEvent ({ nativeEvent, event }) {
                         const open = () => {
-                        this.selectedEvent = event
-                        this.selectedElement = nativeEvent.target
-                        setTimeout(() => {
-                            this.selectedOpen = true
-                        }, 10)
+                            this.selectedEvent = event
+                            this.selectedElement = nativeEvent.target
+                            setTimeout(() => {
+                                this.selectedOpen = true
+                            }, 10)
                         }
 
                         if (this.selectedOpen) {
-                        this.selectedOpen = false
-                        setTimeout(open, 10)
+                            this.selectedOpen = false
+                            setTimeout(open, 10)
                         } else {
-                        open()
+                            open()
                         }
 
                         nativeEvent.stopPropagation()
