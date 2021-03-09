@@ -2,11 +2,12 @@
 <html>
     <head>
         <title>Note ton prof</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="custom.css">
     </head>
     <body>
         <div id="App" class="container">
@@ -23,7 +24,7 @@
                         <div v-if="$refs.calendar">
                             {{ $refs.calendar.title }}
                         </div>
-                        <div class="ml-auto btn-group">
+                        <!-- <div class="ml-auto btn-group">
                             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ typeSelected.name }}
                             </button>
@@ -34,7 +35,7 @@
                                     class="dropdown-item" type="button"
                                 >{{ type.name }}</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <v-sheet height="600">
@@ -43,6 +44,7 @@
                             v-model="focus"
                             color="primary"
                             :events="events"
+                            event-overlap-mode="column"
                             :event-color="getEventColor"
                             :type="typeSelected.key"
                             @click:event="showEvent"
@@ -92,9 +94,15 @@
         <script>
             var app = new Vue({
                 el:"#App",
-                vuetify: new Vuetify(),
+                vuetify: new Vuetify({
+                    lang: {
+                        current: 'fr',
+                    },
+                }),
                 
                 data:{
+                    cours: [],
+
                     focus: "",
                     typeSelected: { key: "day", name: "Jour" },
                     types: [
@@ -110,10 +118,49 @@
                     names: ["Evenement"],
                 },
 
-                mounted(){
+                mounted() {
+                    this.getCours()
                     this.$refs.calendar.checkChange()
                 },
                 methods:{
+                    getCours() {
+                        axios.get("/api/cours/today")
+                        .then(response => {
+                            let cours = response.data
+                            let events = []
+
+                            cours.forEach(element => {                                
+                                events.push({
+                                    name: `[${element.matiere.reference}] ${element.matiere.titre} {element.matiere.type} ${element.salle.numero} ${this.fullName(element.professeur)}`,
+                                    start: this.convertirDate(element.dateHeureDebut),
+                                    end: this.convertirDate(element.dateHeureFin),
+                                    color: "red",
+                                    timed: true,
+                                })
+                            })
+                            this.events = events
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    },
+
+                    convertirDate(date) {
+                        let arrayDate = date.split(" ")
+                        let day = arrayDate[0]
+                        let time = arrayDate[1]
+
+                        day = day.split("-").reverse().join("-")
+                        return day + " " + time
+                    },
+                    fullName(professeur) {
+                        return professeur.prenom + " " + professeur.nom
+                    },
+
+
+
+
+
                     // Vuetify
                     viewDay ({ date }) {
                         this.focus = date
@@ -150,30 +197,30 @@
                         nativeEvent.stopPropagation()
                     },
                     updateRange ({ start, end }) {
-                        const events = []
+                        // const events = []
 
-                        const min = new Date(`${start.date}T00:00:00`)
-                        const max = new Date(`${end.date}T23:59:59`)
-                        const days = (max.getTime() - min.getTime()) / 86400000
-                        const eventCount = this.rnd(days, days + 20)
+                        // const min = new Date(`${start.date}T00:00:00`)
+                        // const max = new Date(`${end.date}T23:59:59`)
+                        // const days = (max.getTime() - min.getTime()) / 86400000
+                        // const eventCount = this.rnd(days, days + 20)
 
-                        for (let i = 0; i < eventCount; i++) {
-                        const allDay = this.rnd(0, 3) === 0
-                        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-                        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-                        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-                        const second = new Date(first.getTime() + secondTimestamp)
+                        // for (let i = 0; i < eventCount; i++) {
+                        //     const allDay = this.rnd(0, 3) === 0
+                        //     const firstTimestamp = this.rnd(min.getTime(), max.getTime())
+                        //     const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+                        //     const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
+                        //     const second = new Date(first.getTime() + secondTimestamp)
 
-                        events.push({
-                            name: this.names[this.rnd(0, this.names.length - 1)],
-                            start: first,
-                            end: second,
-                            color: this.colors[this.rnd(0, this.colors.length - 1)],
-                            timed: !allDay,
-                        })
-                        }
+                        //     events.push({
+                        //         name: this.names[this.rnd(0, this.names.length - 1)],
+                        //         start: first,
+                        //         end: second,
+                        //         color: this.colors[this.rnd(0, this.colors.length - 1)],
+                        //         timed: !allDay,
+                        //     })
+                        // }
 
-                        this.events = events
+                        // this.events = events
                     },
                     rnd (a, b) {
                         return Math.floor((b - a + 1) * Math.random()) + a

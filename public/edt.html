@@ -78,18 +78,7 @@
         <script>
             var app = new Vue({
                 el:"#App",
-                vuetify: new Vuetify(),
-                components: {
-                    // VCalendar
-                },
                 data:{
-                    attrs: [
-                        {
-                        key: 'today',
-                        highlight: "red",
-                        dates: new Date(),
-                        },
-                    ],
                     professeurs: [],
                     professeurSelected: null,
                     avis: [],
@@ -98,7 +87,6 @@
                 },
                 mounted(){
                     this.getProfesseurs()
-                    console.log(Vue)
                 },
                 methods:{
                     fullName(professeur) {
