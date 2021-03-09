@@ -101,7 +101,7 @@
                 }),
                 
                 data:{
-                    cours: [],
+                    dayShown: 0,
 
                     focus: "",
                     typeSelected: { key: "day", name: "Jour" },
@@ -119,12 +119,12 @@
                 },
 
                 mounted() {
-                    this.getCours()
+                    // this.getCours()
                     this.$refs.calendar.checkChange()
                 },
                 methods:{
-                    getCours() {
-                        axios.get("/api/cours/today")
+                    getCours(period) {
+                        axios.get(`/api/cours/${period}`)
                         .then(response => {
                             let cours = response.data
                             let events = []
@@ -149,9 +149,10 @@
                         let arrayDate = date.split(" ")
                         let day = arrayDate[0]
                         let time = arrayDate[1]
+                        time = time ? " " + time : ""
 
                         day = day.split("-").reverse().join("-")
-                        return day + " " + time
+                        return day + time
                     },
                     fullName(professeur) {
                         return professeur.prenom + " " + professeur.nom
@@ -174,9 +175,11 @@
                     },
                     prev () {
                         this.$refs.calendar.prev()
+                        this.dayShown--
                     },
                     next () {
                         this.$refs.calendar.next()
+                        this.dayShown++
                     },
                     showEvent ({ nativeEvent, event }) {
                         const open = () => {
@@ -197,6 +200,15 @@
                         nativeEvent.stopPropagation()
                     },
                     updateRange ({ start, end }) {
+                        console.log(start)
+                        console.log(end)
+                        let dateStartFR = this.convertirDate(start.date)
+                        let dateEndFR = this.convertirDate(end.date)
+                        let urlParaM = `between/${dateStartFR}/${dateEndFR}`
+
+                        this.getCours(urlParaM)
+
+
                         // const events = []
 
                         // const min = new Date(`${start.date}T00:00:00`)
