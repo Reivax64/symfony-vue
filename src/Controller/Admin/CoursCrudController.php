@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Cours;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 class CoursCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -28,8 +30,8 @@ class CoursCrudController extends AbstractCrudController
         return [
             'dateHeureDebut',
             'dateHeureFin',
-            'type',
-            'couleur',
+            ChoiceField::new('type')->setChoices(["COURS"=> "COURS", "TP" => "TP", "TD" => "TD"])->renderAsNativeWidget(),
+            ColorField::new('couleur'),
             AssociationField::new('salle')->setFormTypeOptions(['by_reference' => false]),
             AssociationField::new('classe')->setFormTypeOptions(['by_reference' => false]),
             AssociationField::new('professeur')->setFormTypeOptions(['by_reference' => false]),
