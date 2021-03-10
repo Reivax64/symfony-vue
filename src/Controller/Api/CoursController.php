@@ -10,12 +10,12 @@ use App\Repository\CoursRepository;
 
 
  /**
-  * @Route("/api/cours", name="api_cours_")
+  * @Route("/api/cours", name="api_cours")
   */
 class CoursController extends AbstractController
 {
     /**
-     * @Route("",name="index",methods={"GET"})
+     * @Route("",name="",methods={"GET"})
      */
     public function index(CoursRepository $repository) :Response
     {
@@ -25,6 +25,7 @@ class CoursController extends AbstractController
 
     }
 
+    
     /**
      * @Route("/today",name="_today",methods={"GET"})
      */
@@ -37,6 +38,7 @@ class CoursController extends AbstractController
         return $this->json($cours,200);
 
     }
+    
 
     /**
      * @Route("/between/{datedebut}/{dateend}",name="_between",methods={"GET"})

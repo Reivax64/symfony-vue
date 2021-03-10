@@ -9,7 +9,8 @@ return [
     false, // $matchHost
     [ // $staticRoutes
         '/admin' => [[['_route' => 'admin', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
-        '/api/cours/today' => [[['_route' => 'api_cours__today', '_controller' => 'App\\Controller\\Api\\CoursController::today'], null, ['GET' => 0], null, false, false, null]],
+        '/api/cours' => [[['_route' => 'api_cours', '_controller' => 'App\\Controller\\Api\\CoursController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/api/cours/today' => [[['_route' => 'api_cours_today', '_controller' => 'App\\Controller\\Api\\CoursController::today'], null, ['GET' => 0], null, false, false, null]],
         '/api/professeurs' => [[['_route' => 'api_professeurs_index', '_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/salles' => [[['_route' => 'api_cours_index', '_controller' => 'App\\Controller\\Api\\SalleController::index'], null, ['GET' => 0], null, false, false, null]],
         '/professeurs' => [[['_route' => 'professeurs_index', '_controller' => 'App\\Controller\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
@@ -44,8 +45,8 @@ return [
     ],
     [ // $dynamicRoutes
         35 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        84 => [[['_route' => 'api_cours__between', '_controller' => 'App\\Controller\\Api\\CoursController::between'], ['datedebut', 'dateend'], ['GET' => 0], null, false, true, null]],
-        104 => [[['_route' => 'api_cours__add_days', '_controller' => 'App\\Controller\\Api\\CoursController::addDays'], ['nb_add_days'], ['GET' => 0], null, false, true, null]],
+        84 => [[['_route' => 'api_cours_between', '_controller' => 'App\\Controller\\Api\\CoursController::between'], ['datedebut', 'dateend'], ['GET' => 0], null, false, true, null]],
+        104 => [[['_route' => 'api_cours_add_days', '_controller' => 'App\\Controller\\Api\\CoursController::addDays'], ['nb_add_days'], ['GET' => 0], null, false, true, null]],
         139 => [[['_route' => 'api_professeurs_show', '_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], ['id'], ['GET' => 0], null, false, true, null]],
         155 => [
             [['_route' => 'api_professeurs_index_avis', '_controller' => 'App\\Controller\\Api\\ProfesseurController::indexAvis'], ['id'], ['GET' => 0], null, false, false, null],
