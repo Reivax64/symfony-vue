@@ -6,7 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CoursRepository;
+use App\Repository\ProfesseurRepository;
+use App\Repository\MatiereRepository;
+use App\Repository\SalleRepository;
 
+
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Cours;
 
 
  /**
@@ -68,6 +76,37 @@ class CoursController extends AbstractController
 
 
         return $this->json($cours,200);
+
+    }
+
+    /**
+     * @Route("/create", name="create_cours", methods={"POST"})
+     */
+    public function createCours(Request $request,ValidatorInterface $validator,EntityManagerInterface $em,ProfesseurRepository $pr,MatiereRepository $mr,SalleRepository $sr)
+    {
+        $data = json_decode($request->getContent(), true);
+        $prof = $pr->find($data["professeur"]);
+        $matiere = $mr->find($data["matiere"]);
+        $salle = $sr->find($data["salle"]);
+
+        $data["professeur"] = $prof;
+        $data["matiere"] = $matiere;
+        $data["salle"] = $salle;
+        $cours = new Cours($data);
+        
+        $errors = $validator->validate($cours);
+
+        if ($errors->count() > 0){
+            $messages = [];
+            foreach($errors as $error){
+                $messages[$error->getPropertyPath()] = $error->getMessage();
+            }
+            return $this->json($messages, 400);
+        }
+        $em->persist($cours);
+        $em->flush();
+
+        return $this->json($cours, 200);
 
     }
 }

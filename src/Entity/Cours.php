@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
+use App\Repository\ProfesseurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -62,6 +63,26 @@ class Cours implements \JsonSerializable
      * @ORM\JoinColumn(nullable=false)
      */
     private $matiere;
+
+    public function __construct(array $data = [])
+    {
+        if( $data["dateHeureDebut"]){
+            $date = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureDebut"]);
+            $this->dateHeureDebut =$date;
+            
+        }
+        if( $data["dateHeureFin"]){
+            $dateF = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureFin"]);
+            $this->dateHeureFin =$dateF;
+            
+        }
+        $this->type = $data["type"] ?? null;
+        $this->couleur = $data["couleur"] ?? null;
+
+        $this->salle = $data["salle"] ?? null;
+        $this->professeur = $data["professeur"] ?? null;
+        $this->matiere = $data["matiere"] ?? null;
+    }
 
     public function getId(): ?int
     {
