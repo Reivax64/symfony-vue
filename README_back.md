@@ -129,6 +129,20 @@ dans CoursRepository :
     }
 ```
 
+et enfin dans Entity\Cours : 
+
+'''
+use App\Validator\Cours as c_validator; 
+
+
+/**
+ * @ORM\Entity(repositoryClass=CoursRepository::class)
+ * @c_validator
+ */
+class Cours implements \JsonSerializable
+{
+'''
+
 ## API
 
 ### Cours 
