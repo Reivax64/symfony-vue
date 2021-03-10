@@ -53,8 +53,14 @@ class Cours implements \JsonSerializable
     private $salle;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Professeur::class, inversedBy="cours")
+     * @ORM\ManyToOne(targetEntity=Classe::class)
      * @ORM\JoinColumn(nullable=false)
+     */
+    private $classe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Professeur::class, inversedBy="cours")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $professeur;
 
@@ -173,6 +179,18 @@ class Cours implements \JsonSerializable
         return $this;
     }
 
+    public function getClasse(): ?classe
+    {
+        return $this->classe;
+    }
+
+    public function setClasse(?Classe $classe): self
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->DateHeureDebut + " " + $this->DateHeureFin;
@@ -189,6 +207,7 @@ class Cours implements \JsonSerializable
             "type" => $this->type,
             "matiere" => $this->matiere,
             "salle" => $this->salle,
+            "classe" => $this->classe,
         ];
     }
     
