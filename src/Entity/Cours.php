@@ -41,6 +41,11 @@ class Cours implements \JsonSerializable
     private $type;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $couleur;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Salle::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -99,6 +104,18 @@ class Cours implements \JsonSerializable
         return $this;
     }
 
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(string $couleur): self
+    {
+        $this->couleur = $couleur;
+
+        return $this;
+    }
+
     public function getSalle(): ?salle
     {
         return $this->salle;
@@ -147,6 +164,7 @@ class Cours implements \JsonSerializable
             'dateHeureDebut' => $this->dateHeureDebut->format("d-m-Y H:i:s"),
             'dateHeureFin' => $this->dateHeureFin->format("d-m-Y H:i:s"),
             "professeur" => $this->professeur,
+            "couleur" => $this->couleur,
             "type" => $this->type,
             "matiere" => $this->matiere,
             "salle" => $this->salle,
