@@ -81,7 +81,7 @@ class CoursController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create_cours", methods={"POST"})
+     * @Route("", name="create_cours", methods={"POST"})
      */
     public function createCours(Request $request,ValidatorInterface $validator,EntityManagerInterface $em,ProfesseurRepository $pr,MatiereRepository $mr,SalleRepository $sr,ClasseRepository $cr)
     {

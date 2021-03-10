@@ -71,7 +71,7 @@ class CoursValidator extends ConstraintValidator
             ->addViolation();
         }
 
-        if($salle_non_dispo){
+        if($classe_non_dispo){
             $this->context->buildViolation($constraint->messageClasseDejaPris)
             ->addViolation();
         }
