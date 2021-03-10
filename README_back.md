@@ -1,22 +1,19 @@
-#symfony-vue
+# symfony-vue
 
-#Back Office 
+## Back Office
 
+## Base de donnée / Entity :
+Création de 2 entity :
+    Cours & salle
 
-## Base de donnée / Entity : 
-Création de 2 entity : 
-    Cours & salle 
+Création des fonctions CRUD dans /admin
 
-
-Création des fonctions CRUD dans /admin 
-
-
-## Validator pour Cours : 
- création : php bin/console make:validator 
+## Validator pour Cours :
+ création : ```bash php bin/console make:validator```
 
 ### Validator/Cours.php
-'''
 
+```PHP
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -38,17 +35,17 @@ class Cours extends Constraint
         return get_class($this).'Validator';
     }
     
-    //pour pouvoir liée a une class
+    // pour pouvoir liée a une class
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;
     }
 }
-'''
+```
 
 ### Validator/CoursValidator.php : 
 
-'''
+```PHP
 class CoursValidator extends ConstraintValidator
 {
     private $coursRepository;
@@ -59,7 +56,7 @@ class CoursValidator extends ConstraintValidator
     }
     public function validate($protocol, Constraint $constraint)
     {
-        //vérifie si la date de fin est le même jours que la date du début 
+        // vérifie si la date de fin est le même jours que la date du début 
         if($protocol->getDateHeureDebut()->format('d-m-Y') != $protocol->getDateHeureFin()->format('d-m-Y')){
             $this->context->buildViolation($constraint->messageDayDifferent)
             ->addViolation();
@@ -110,27 +107,27 @@ class CoursValidator extends ConstraintValidator
         }
     }
 }
-'''
+```
 
 dans CoursRepository : 
-'''
+```PHP
     public function getInSameCreneau(\Datetime $datedebut,\Datetime $datefin)
-        {
-            $from = new \DateTime($datedebut->format("Y-m-d H:i:s"));
-            $to   = new \DateTime($datefin->format("Y-m-d H:i:s"));
+    {
+        $from = new \DateTime($datedebut->format("Y-m-d H:i:s"));
+        $to   = new \DateTime($datefin->format("Y-m-d H:i:s"));
 
-            $qb = $this->createQueryBuilder("e");
-            $qb
-                ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
-                ->orWhere('e.dateHeureFin BETWEEN :from AND :to')
-                ->setParameter('from', $from )
-                ->setParameter('to', $to)
-            ;
-            $result = $qb->getQuery()->getResult();
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->orWhere('e.dateHeureFin BETWEEN :from AND :to')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $result = $qb->getQuery()->getResult();
 
-            return $result;
-        }
-'''
+        return $result;
+    }
+```
 
 ## API
 
@@ -146,7 +143,7 @@ url : /api/cours ==> renvoie listing de tous les cours
 route : 
     @Route("",name="index",methods={"GET"})
 code : 
-'''
+```PHP
     public function index(CoursRepository $repository) :Response
     {
         $cours = $repository->findAll(); // récupère tous les cours
@@ -154,13 +151,13 @@ code :
         return $this->json($cours,200); // renvoie la list
 
     }
-    '''
+```
 
 url : /api/cours/today => récuère les cours du jour
     route : 
         @Route("/today",name="_today",methods={"GET"})
     code : 
-    '''
+```PHP
         public function today(CoursRepository $repository) :Response
         {
             $now = new \DateTime(); //init date du jour
@@ -170,9 +167,9 @@ url : /api/cours/today => récuère les cours du jour
             return $this->json($cours,200); //renvoie la lst 
 
         }
-        '''
+```
     dans CoursRepository : ajouter une fct qui cherche par date 
-    '''
+```PHP
     public function getByDate(\Datetime $date)
         {
             $from = new \DateTime($date->format("Y-m-d")." 00:00:00"); // prend la première valeur
@@ -188,14 +185,14 @@ url : /api/cours/today => récuère les cours du jour
 
             return $result;
         }
-        '''
+```
 
 
 url : /api/cours/between/XX-XX-XXXX/XX-XX-XXXX => récupère les cours entre 2 dates
     route : 
         @Route("/between/{datedebut}/{dateend}",name="_between",methods={"GET"}
     code : 
-        '''
+```PHP
         public function between(CoursRepository $repository,$datedebut,$dateend) :Response
         {
             $datetime = new \DateTime();
@@ -207,9 +204,9 @@ url : /api/cours/between/XX-XX-XXXX/XX-XX-XXXX => récupère les cours entre 2 d
             return $this->json($cours,200); // renvoie la liste
 
         }
-        '''
+```
     dans CoursRepository : ajouter une fct qui cherche entre 2 date
-    '''
+```PHP
     public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin)
         {
             $from = new \DateTime($datedebut->format("Y-m-d")." 00:00:00");
@@ -225,14 +222,14 @@ url : /api/cours/between/XX-XX-XXXX/XX-XX-XXXX => récupère les cours entre 2 d
 
             return $result;
         }
-        '''
+```
 
 url : /api/cours/days/X => récupère les cours en fonction de la date d'aujourd'hui + X jours
     route : 
         @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
 
     code : 
-    '''
+```PHP
         public function addDays(CoursRepository $repository,int $nb_add_days) :Response
         {
             $datetime = new \DateTime();
@@ -244,4 +241,4 @@ url : /api/cours/days/X => récupère les cours en fonction de la date d'aujourd
             return $this->json($cours,200);
 
         }
-    '''
+```

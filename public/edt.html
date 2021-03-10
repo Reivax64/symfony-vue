@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-4" v-if="professeurSelected">
-                    <h2>Avis concernant {{ professeurSelected.nom + " " + professeurSelected.prenom }} </h2>
+                    <h2>Avis concernant {{ fullName(professeurSelected) }} </h2>
                     <form class="" v-on:submit.prevent="postAvis()" class="mb-5">
                         <div class="form-group">
                             <label>Note</label>
@@ -51,29 +51,28 @@
                             <input type="submit" class="btn btn-primary" value="ajouter un avis"/>
                         </div>
                         <ul class="danger">
-                            <li v-for="err in errors">{{err}}</li>
+                            <li v-for="err in errors">{{ err }}</li>
                         </ul>
                     </form>
                     <div class="card" v-for="unAvis in avis">
                         <div class="card-body">
-                            <div class="card-title">{{unAvis.note}} /5</div>
+                            <div class="card-title">{{ unAvis.note }} /5</div>
                             <p class="card-text">
-                                <i>{{unAvis.emailEtudiant}}</i>
-                                {{unAvis.commentaire}}
+                                <i>{{ unAvis.emailEtudiant }}</i>
+                                {{ unAvis.commentaire }}
                             </p>
                         </div>
                     </div>
                 </div>
-                <v-calendar></v-calendar>
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        
-        <!-- <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.2.4/lib/v-calendar.umd.min.js" integrity="sha256-1qsBxPpY5MJfDT/s2X3mV1sZnxBUQ9w9QjmscvNsEBo=" crossorigin="anonymous"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
         <script>
             var app = new Vue({

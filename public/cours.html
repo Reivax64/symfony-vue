@@ -2,12 +2,9 @@
 <html>
     <head>
         <title>Note ton prof</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.4.5/dist/vuetify.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" href="custom.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.4.5/dist/vuetify.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
     </head>
     <body>
         <div id="App" class="container">
@@ -24,88 +21,84 @@
                         <div v-if="$refs.calendar">
                             {{ $refs.calendar.title }}
                         </div>
-                        <v-menu
-            bottom
-            right
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                outlined
-                color="grey darken-2"
-                v-bind="attrs"
-                v-on="on"
-              >
-                <span>test</span>
-                <v-icon right>
-                  mdi-menu-down
-                </v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item >
-                <v-list-item-title>Day</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item >
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+<!--                         
+                        <select class="form-control d-inline ml-auto" v-model="typeSelected">
+                            <option v-for="type in types" :key="type.key" :value="type">
+                                {{ type.name }}
+                            </option>
+                        </select> -->
+                        <div class="ml-auto btn-group">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ typeSelected.name }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button 
+                                    v-for="type in types" :key="type.key" 
+                                    @click="typeSelected = type" 
+                                    class="dropdown-item" type="button"
+                                >{{ type.name }}</button>
+                            </div>
+                        </div>
                     </div>
                     
-                    <v-sheet height="600">
-                        <v-calendar
-                            ref="calendar"
-                            v-model="focus"
-                            color="primary"
-                            :events="events"
-                            event-overlap-mode="column"
-                            :event-color="getEventColor"
-                            :type="typeSelected.key"
-                            @click:event="showEvent"
-                            @click:more="viewDay"
-                            @click:date="viewDay"
-                            @change="updateRange"
-                        ></v-calendar>
-                        <v-menu
-                            v-model="selectedOpen"
-                            :close-on-content-click="false"
-                            :activator="selectedElement"
-                            offset-x
+                    <v-calendar
+                        ref="calendar"
+                        :hide-header="false"
+                        :interval-height="40"
+                        :interval-width="40"
+                        :short-weekdays="false"
+                        v-model="focus"
+                        color="red"
+                        :events="events"
+                        event-overlap-mode="column"
+                        :event-color="getEventColor"
+                        :type="typeSelected.key"
+                        :interval-minutes= 60 
+                        :first-interval= 7
+                        :interval-count= 12
+                        @click:event="showEvent"
+                        @click:more="viewDay"
+                        @click:date="viewDay"
+                        @change="updateRange"
+                    ></v-calendar>
+                    <v-menu
+                        v-model="selectedOpen"
+                        :close-on-content-click="false"
+                        :activator="selectedElement"
+                        offset-x
+                    >
+                        <v-card
+                            color="grey lighten-4"
+                            min-width="350px"
+                            flat
                         >
-                            <v-card
-                                color="grey lighten-4"
-                                min-width="350px"
-                                flat
-                            >
-                            <v-toolbar :color="selectedEvent.color" dark>
-                                <v-btn icon><v-icon>mdi-pencil</v-icon></v-btn>
-                                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                                <v-spacer></v-spacer>
-                                <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
-                                <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
-                            </v-toolbar>
+                        <v-toolbar :color="selectedEvent.color" dark>
+                            <v-btn icon><v-icon>mdi-pencil</v-icon></v-btn>
+                            <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+                            <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
+                        </v-toolbar>
 
-                            <v-card-text><span v-html="selectedEvent.details"></span></v-card-text>
+                        <v-card-text><span v-html="selectedEvent.details"></span></v-card-text>
 
-                            <v-card-actions>
-                                <v-btn
-                                text
-                                color="secondary"
-                                @click="selectedOpen = false"
-                                >Annuler</v-btn>
-                            </v-card-actions>
-                            </v-card>
-                        </v-menu>
-                    </v-sheet>
+                        <v-card-actions>
+                            <v-btn
+                            text
+                            color="secondary"
+                            @click="selectedOpen = false"
+                            >Annuler</v-btn>
+                        </v-card-actions>
+                        </v-card>
+                    </v-menu>
                 </div>
             </div>
         </div>
+
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>        
@@ -121,8 +114,6 @@
                 }),
                 
                 data:{
-                    dayShown: 0,
-
                     focus: "",
                     typeSelected: { key: "day", name: "Jour" },
                     types: [
@@ -139,7 +130,6 @@
                 },
 
                 mounted() {
-                    // this.getCours()
                     this.$refs.calendar.checkChange()
                 },
                 methods:{
@@ -151,7 +141,7 @@
 
                             cours.forEach(element => {                                
                                 events.push({
-                                    name: `[${element.matiere.reference}] ${element.matiere.titre} {element.matiere.type} ${element.salle.numero} ${this.fullName(element.professeur)}`,
+                                    name: `[${element.matiere.reference}] ${element.matiere.titre} ${element.type} ${element.salle.numero} ${this.fullName(element.professeur)}`,
                                     start: this.convertirDate(element.dateHeureDebut),
                                     end: this.convertirDate(element.dateHeureFin),
                                     color: "red",
@@ -178,16 +168,14 @@
                         return professeur.prenom + " " + professeur.nom
                     },
 
-
-
-
-
                     // Vuetify
                     viewDay ({ date }) {
+                        console.log(date)
                         this.focus = date
-                        this.type = 'day'
+                        this.typeSelected = { key: "day", name: "Jour" }
                     },
                     getEventColor (event) {
+                        console.log(event.color)
                         return event.color
                     },
                     setToday () {
@@ -195,11 +183,9 @@
                     },
                     prev () {
                         this.$refs.calendar.prev()
-                        this.dayShown--
                     },
                     next () {
                         this.$refs.calendar.next()
-                        this.dayShown++
                     },
                     showEvent ({ nativeEvent, event }) {
                         const open = () => {
@@ -220,42 +206,11 @@
                         nativeEvent.stopPropagation()
                     },
                     updateRange ({ start, end }) {
-                        console.log(start)
-                        console.log(end)
                         let dateStartFR = this.convertirDate(start.date)
                         let dateEndFR = this.convertirDate(end.date)
                         let urlParaM = `between/${dateStartFR}/${dateEndFR}`
 
                         this.getCours(urlParaM)
-
-
-                        // const events = []
-
-                        // const min = new Date(`${start.date}T00:00:00`)
-                        // const max = new Date(`${end.date}T23:59:59`)
-                        // const days = (max.getTime() - min.getTime()) / 86400000
-                        // const eventCount = this.rnd(days, days + 20)
-
-                        // for (let i = 0; i < eventCount; i++) {
-                        //     const allDay = this.rnd(0, 3) === 0
-                        //     const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-                        //     const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-                        //     const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-                        //     const second = new Date(first.getTime() + secondTimestamp)
-
-                        //     events.push({
-                        //         name: this.names[this.rnd(0, this.names.length - 1)],
-                        //         start: first,
-                        //         end: second,
-                        //         color: this.colors[this.rnd(0, this.colors.length - 1)],
-                        //         timed: !allDay,
-                        //     })
-                        // }
-
-                        // this.events = events
-                    },
-                    rnd (a, b) {
-                        return Math.floor((b - a + 1) * Math.random()) + a
                     },
                 },
             });
