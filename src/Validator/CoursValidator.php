@@ -43,6 +43,7 @@ class CoursValidator extends ConstraintValidator
 
         $salle_non_dispo = false;
         $prof_non_dispo = false;
+        $classe_non_dispo = false;
 
         foreach($cours_same_time as $cst){
             // vérifie si la salle est dispo
@@ -52,6 +53,10 @@ class CoursValidator extends ConstraintValidator
             // vérifie si le prof est dispo
             if($cst->getProfesseur()->getId() == $protocol->getProfesseur()->getId()){
                 $prof_non_dispo = true;
+            }
+
+            if($cst->getClasse()->getId() == $protocol->getClasse()->getId()){
+                $classe_non_dispo = true;
             }
         }
 
@@ -63,6 +68,11 @@ class CoursValidator extends ConstraintValidator
 
         if($prof_non_dispo){
             $this->context->buildViolation($constraint->messageProfDejaPris)
+            ->addViolation();
+        }
+
+        if($salle_non_dispo){
+            $this->context->buildViolation($constraint->messageClasseDejaPris)
             ->addViolation();
         }
     }

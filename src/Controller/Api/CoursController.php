@@ -9,6 +9,7 @@ use App\Repository\CoursRepository;
 use App\Repository\ProfesseurRepository;
 use App\Repository\MatiereRepository;
 use App\Repository\SalleRepository;
+use App\Repository\ClasseRepository;
 
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -82,16 +83,18 @@ class CoursController extends AbstractController
     /**
      * @Route("/create", name="create_cours", methods={"POST"})
      */
-    public function createCours(Request $request,ValidatorInterface $validator,EntityManagerInterface $em,ProfesseurRepository $pr,MatiereRepository $mr,SalleRepository $sr)
+    public function createCours(Request $request,ValidatorInterface $validator,EntityManagerInterface $em,ProfesseurRepository $pr,MatiereRepository $mr,SalleRepository $sr,ClasseRepository $cr)
     {
         $data = json_decode($request->getContent(), true);
         $prof = $pr->find($data["professeur"]);
         $matiere = $mr->find($data["matiere"]);
         $salle = $sr->find($data["salle"]);
+        $classe = $cr->find($data["classe"]);
 
         $data["professeur"] = $prof;
         $data["matiere"] = $matiere;
         $data["salle"] = $salle;
+        $data["classe"] = $classe;
         $cours = new Cours($data);
         
         $errors = $validator->validate($cours);

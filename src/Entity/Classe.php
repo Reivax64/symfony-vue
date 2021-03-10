@@ -32,6 +32,11 @@ class Classe implements \JsonSerializable
         return $this->nom;
     }
 
+    public function __toString()
+    {
+        return $this->nom ;
+    }
+
     public function setNom(string $nom): self
     {
         $this->nom = $nom;

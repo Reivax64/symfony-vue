@@ -12,6 +12,7 @@ use App\Entity\Matiere;
 use App\Entity\Avis;
 use App\Entity\Cours;
 use App\Entity\Salle;
+use App\Entity\Classe;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -38,6 +39,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Avis','fas fa-star',Avis::class),
             MenuItem::linkToCrud('Cours','fas fa-graduation-cap',Cours::class),
             MenuItem::linkToCrud('Salle','fas fa-school',Salle::class),
+            MenuItem::linkToCrud('Classe','fas fa-users',Classe::class),
         ];
     }
 }

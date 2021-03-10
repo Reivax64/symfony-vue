@@ -31,6 +31,7 @@ class CoursCrudController extends AbstractCrudController
             'type',
             'couleur',
             AssociationField::new('salle')->setFormTypeOptions(['by_reference' => false]),
+            AssociationField::new('classe')->setFormTypeOptions(['by_reference' => false]),
             AssociationField::new('professeur')->setFormTypeOptions(['by_reference' => false]),
             AssociationField::new('matiere')->setFormTypeOptions(['by_reference' => false]),
         ];

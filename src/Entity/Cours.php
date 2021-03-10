@@ -72,12 +72,12 @@ class Cours implements \JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if( $data["dateHeureDebut"]){
+        if(isset($data["dateHeureDebut"])){
             $date = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureDebut"]);
             $this->dateHeureDebut =$date;
             
         }
-        if( $data["dateHeureFin"]){
+        if(isset($data["dateHeureFin"])){
             $dateF = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureFin"]);
             $this->dateHeureFin =$dateF;
             
@@ -88,6 +88,7 @@ class Cours implements \JsonSerializable
         $this->salle = $data["salle"] ?? null;
         $this->professeur = $data["professeur"] ?? null;
         $this->matiere = $data["matiere"] ?? null;
+        $this->classe = $data["classe"] ?? null;
     }
 
     public function getId(): ?int

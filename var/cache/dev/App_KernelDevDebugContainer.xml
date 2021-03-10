@@ -226,6 +226,14 @@
         <argument type="service" id=".service_locator.7Gh9pQb.App\Controller\Admin\AvisCrudController"/>
       </call>
     </service>
+    <service id="App\Controller\Admin\ClasseCrudController" class="App\Controller\Admin\ClasseCrudController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="ea.crud_controller"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.7Gh9pQb.App\Controller\Admin\ClasseCrudController"/>
+      </call>
+    </service>
     <service id="App\Controller\Admin\CoursCrudController" class="App\Controller\Admin\CoursCrudController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="ea.crud_controller"/>
@@ -4489,6 +4497,10 @@
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AvisCrudController" class="App\Controller\Admin\AvisCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface.0.App\Controller\Admin\AvisCrudController" class="App\Controller\Admin\AvisCrudController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AvisCrudController" class="App\Controller\Admin\AvisCrudController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\ClasseCrudController" class="App\Controller\Admin\ClasseCrudController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\ClasseCrudController" class="App\Controller\Admin\ClasseCrudController" autowire="true" abstract="true"/>
+    <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface.0.App\Controller\Admin\ClasseCrudController" class="App\Controller\Admin\ClasseCrudController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\ClasseCrudController" class="App\Controller\Admin\ClasseCrudController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\CoursCrudController" class="App\Controller\Admin\CoursCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\CoursCrudController" class="App\Controller\Admin\CoursCrudController" autowire="true" abstract="true"/>
     <service id=".instanceof.EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface.0.App\Controller\Admin\CoursCrudController" class="App\Controller\Admin\CoursCrudController" autowire="true" abstract="true"/>
@@ -4992,9 +5004,10 @@
         <argument key="repository" type="service" id="App\Repository\CoursRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.GdaJjb5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.DPyAAGX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="cr" type="service" id="App\Repository\ClasseRepository"/>
         <argument key="em" type="service" id="doctrine.orm.default_entity_manager"/>
         <argument key="mr" type="service" id="App\Repository\MatiereRepository"/>
         <argument key="pr" type="service" id="App\Repository\ProfesseurRepository"/>
@@ -5048,7 +5061,7 @@
         <argument key="professeur" type="service" id=".errored..service_locator..ewpm5Q.App\Entity\Professeur"/>
       </argument>
     </service>
-    <service id=".service_locator.f7ol9S7" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator..iI7NFx" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AvisCrudController::autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
@@ -5071,6 +5084,26 @@
         <argument key="App\Controller\Admin\AvisCrudController::persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\AvisCrudController::renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\AvisCrudController::updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::configureActions" type="service" id=".service_locator.CKlWSja"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::configureAssets" type="service" id=".service_locator.U4Bbnsn"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::configureCrud" type="service" id=".service_locator.4C0Bh8j"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::configureFilters" type="service" id=".service_locator.Nt.ogDb"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::configureResponseParameters" type="service" id=".service_locator.2dc0eaX"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::createEditForm" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::createEditFormBuilder" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::createIndexQueryBuilder" type="service" id=".service_locator.rAlqQ78"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::createNewForm" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::createNewFormBuilder" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::delete" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::deleteEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::detail" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::edit" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::index" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::new" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController::updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\CoursCrudController::autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\CoursCrudController::configureActions" type="service" id=".service_locator.CKlWSja"/>
         <argument key="App\Controller\Admin\CoursCrudController::configureAssets" type="service" id=".service_locator.U4Bbnsn"/>
@@ -5154,7 +5187,7 @@
         <argument key="App\Controller\Admin\SalleCrudController::updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Api\CoursController::addDays" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController::between" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController::createCours" type="service" id=".service_locator.GdaJjb5"/>
+        <argument key="App\Controller\Api\CoursController::createCours" type="service" id=".service_locator.DPyAAGX"/>
         <argument key="App\Controller\Api\CoursController::index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController::today" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\ProfesseurController::createAvis" type="service" id=".service_locator.B3GXs3X"/>
@@ -5192,6 +5225,26 @@
         <argument key="App\Controller\Admin\AvisCrudController:persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\AvisCrudController:renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\AvisCrudController:updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:configureActions" type="service" id=".service_locator.CKlWSja"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:configureAssets" type="service" id=".service_locator.U4Bbnsn"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:configureCrud" type="service" id=".service_locator.4C0Bh8j"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:configureFilters" type="service" id=".service_locator.Nt.ogDb"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:configureResponseParameters" type="service" id=".service_locator.2dc0eaX"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:createEditForm" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:createEditFormBuilder" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:createIndexQueryBuilder" type="service" id=".service_locator.rAlqQ78"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:createNewForm" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:createNewFormBuilder" type="service" id=".service_locator.tbo4Jjv"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:delete" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:deleteEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:detail" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:edit" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:index" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:new" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:persistEntity" type="service" id=".service_locator.l2QwsaZ"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:renderFilters" type="service" id=".service_locator.ZOQ9v2d"/>
+        <argument key="App\Controller\Admin\ClasseCrudController:updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Admin\CoursCrudController:autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
         <argument key="App\Controller\Admin\CoursCrudController:configureActions" type="service" id=".service_locator.CKlWSja"/>
         <argument key="App\Controller\Admin\CoursCrudController:configureAssets" type="service" id=".service_locator.U4Bbnsn"/>
@@ -5275,7 +5328,7 @@
         <argument key="App\Controller\Admin\SalleCrudController:updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Api\CoursController:addDays" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController:between" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController:createCours" type="service" id=".service_locator.GdaJjb5"/>
+        <argument key="App\Controller\Api\CoursController:createCours" type="service" id=".service_locator.DPyAAGX"/>
         <argument key="App\Controller\Api\CoursController:index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController:today" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\ProfesseurController:createAvis" type="service" id=".service_locator.B3GXs3X"/>
@@ -5420,6 +5473,7 @@
       <argument>%env(APP_SECRET)%</argument>
       <argument type="collection">
         <argument>App\Controller\Admin\AvisCrudController</argument>
+        <argument>App\Controller\Admin\ClasseCrudController</argument>
         <argument>App\Controller\Admin\CoursCrudController</argument>
         <argument>App\Controller\Admin\MatiereCrudController</argument>
         <argument>App\Controller\Admin\ProfesseurCrudController</argument>
@@ -5475,6 +5529,12 @@
     <service id=".service_locator.7Gh9pQb.App\Controller\Admin\AvisCrudController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Admin\AvisCrudController"/>
       <argument>App\Controller\Admin\AvisCrudController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.7Gh9pQb" method="withContext"/>
+    </service>
+    <service id=".service_locator.7Gh9pQb.App\Controller\Admin\ClasseCrudController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\ClasseCrudController"/>
+      <argument>App\Controller\Admin\ClasseCrudController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.7Gh9pQb" method="withContext"/>
     </service>
@@ -5700,12 +5760,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.f7ol9S7"/>
+      <argument type="service" id=".service_locator..iI7NFx"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.f7ol9S7"/>
+      <argument type="service" id=".service_locator..iI7NFx"/>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
     <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
@@ -6035,7 +6095,7 @@
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.f7ol9S7"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator..iI7NFx"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.Mo0FXEU" alias="service_locator_EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
