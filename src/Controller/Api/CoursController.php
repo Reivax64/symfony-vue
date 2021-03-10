@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Cours;
+use App\Entity\Classe;
 
 
  /**
@@ -34,6 +35,19 @@ class CoursController extends AbstractController
 
     }
 
+    /**
+     * @Route("/classe/{id}",name="by_classe",methods={"GET"})
+     */
+    public function indexByClasse(Classe $classe, CoursRepository $repository) :Response
+    {
+        $cours = $repository->findBy(
+            ['classe' => $classe->getId()]
+        );
+
+        return $this->json($cours,200);
+
+    }
+
     
     /**
      * @Route("/today",name="_today",methods={"GET"})
@@ -46,6 +60,17 @@ class CoursController extends AbstractController
 
         return $this->json($cours,200);
 
+    }
+    /**
+     * @Route("/classe/today/{id}",name="_today_by_classe",methods={"GET"})
+     */
+    public function todayByClasse(Classe $classe, CoursRepository $repository) :Response
+    {
+        $now = new \DateTime();
+
+        $cours = $repository->getByDate($now,$classe);
+
+        return $this->json($cours,200);
     }
     
 

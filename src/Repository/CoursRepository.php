@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cours;
+use App\Entity\Classe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,7 +20,7 @@ class CoursRepository extends ServiceEntityRepository
         parent::__construct($registry, Cours::class);
     }
 
-    public function getByDate(\Datetime $date)
+    public function getByDate(\Datetime $date, Classe $classe = null)
     {
         $from = new \DateTime($date->format("Y-m-d")." 00:00:00");
         $to   = new \DateTime($date->format("Y-m-d")." 23:59:59");
@@ -30,6 +31,9 @@ class CoursRepository extends ServiceEntityRepository
             ->setParameter('from', $from )
             ->setParameter('to', $to)
         ;
+        if($classe){
+            $qb->andWhere('e.classe = :classe')->setParameter('classe',  $classe->getId() );
+        }
         $result = $qb->getQuery()->getResult();
 
         return $result;
