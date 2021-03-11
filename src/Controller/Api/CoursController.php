@@ -62,7 +62,7 @@ class CoursController extends AbstractController
 
     }
     /**
-     * @Route("/classe/today/{id}",name="_today_by_classe",methods={"GET"})
+     * @Route("/classe/{id}/today",name="_today_by_classe",methods={"GET"})
      */
     public function todayByClasse(Classe $classe, CoursRepository $repository) :Response
     {
@@ -91,6 +91,22 @@ class CoursController extends AbstractController
     }
 
     /**
+     * @Route("/classe/{id}/between/{datedebut}/{dateend}",name="_between_by_classe",methods={"GET"})
+     */
+    public function betweenByClasse(CoursRepository $repository,Classe $classe,$datedebut,$dateend) :Response
+    {
+        $datetime = new \DateTime();
+        $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
+        $end = $datetime->createFromFormat('d-m-Y', $dateend);
+
+
+        $cours = $repository->getByDateBetween($debut,$end,$classe);
+
+        return $this->json($cours,200);
+
+    }
+
+    /**
      * @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
      */
     public function addDays(CoursRepository $repository,int $nb_add_days) :Response
@@ -99,6 +115,21 @@ class CoursController extends AbstractController
         $date = $datetime->modify('+'.$nb_add_days.' day');
 
         $cours = $repository->getByDate($date);
+
+
+        return $this->json($cours,200);
+
+    }
+
+    /**
+     * @Route("/classe/{id}/days/{nb_add_days}",name="_add_days_by_classe",methods={"GET"})
+     */
+    public function addDaysByClasse(Classe $classe,CoursRepository $repository,int $nb_add_days) :Response
+    {
+        $datetime = new \DateTime();
+        $date = $datetime->modify('+'.$nb_add_days.' day');
+
+        $cours = $repository->getByDate($date,$classe);
 
 
         return $this->json($cours,200);
