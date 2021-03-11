@@ -2,56 +2,148 @@
 <html>
     <head>
         <title>Note ton prof</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.4.5/dist/vuetify.min.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.4.5/dist/vuetify.min.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="custom.css">
     </head>
     <body>
         <div id="App" class="container">
-            <div class="row fill-height">
-                <div class="col">
-                    <div class="d-flex">
-                        <button @click="setToday" class="mr-4 btn btn-outline-primary">Aujourd'hui</button>
-                        <button @click="prev" type="button" class="btn btn-default" aria-label="Left Align">
-                            <v-icon small>mdi-chevron-left</v-icon>
-                        </button>
-                        <button @click="next" type="button" class="btn btn-default" aria-label="Left Align">
-                            <v-icon small>mdi-chevron-right</v-icon>
-                        </button>
-                        <div v-if="$refs.calendar">
-                            {{ $refs.calendar.title }}
-                        </div>
-<!--                         
-                        <select class="form-control d-inline ml-auto" v-model="typeSelected">
-                            <option v-for="type in types" :key="type.key" :value="type">
-                                {{ type.name }}
+            <!-- Modal -->
+            <modal :submit="submitForm" ok="Créer un cours">
+                <div class="mb-5">
+                    <div class="form-group">
+                        <label>Matière</label>                                    
+                        <select class="form-control" v-model="coursFormData.matiere" required>
+                            <option v-for="matiere in matieres" :key="matiere.id" :value="matiere.id">
+                                [{{ matiere.reference }}] {{ matiere.titre }}
                             </option>
-                        </select> -->
+                        </select>
+
+                        <label>Type</label>                                    
+                        <select class="form-control" v-model="coursFormData.type" required>
+                            <option>TP</option>
+                            <option>TD</option>
+                            <option>Cours</option>
+                        </select>
+
+                        <label>Salle</label>                                    
+                        <select class="form-control" v-model="coursFormData.salle" required>
+                            <option v-for="salle in salles" :key="salle.id" :value="salle.id">
+                                {{ salle.numero }}
+                            </option>
+                        </select>
+
+                        <label>Professeur</label>                                    
+                        <select class="form-control" v-model="coursFormData.professeur" required>
+                            <option v-for="professeur in professeurs" :key="professeur.id" :value="professeur.id">
+                                {{ professeur | fullName }}
+                            </option>
+                        </select>
+
+                        <label>Classe</label>                                
+                        <select class="form-control" v-model="coursFormData.classe" disabled>
+                            <option selected :value="currentClasse.id">
+                                {{ currentClasse.nom }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <v-alert v-show="errors.length" color="bg-danger" icon="mdi-plus" class="text-white" border="left" transition="scale-transition">
+                    Vous avez commis des erreurs !!
+                    <ul>
+                        <li v-for="error in errors">{{ error }}</li>
+                    </ul>
+                </v-alert>
+            </modal>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="navbar-brand">Calendrier</div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cours.html">
+                                Calendrier <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/edt.html">Note</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Classes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <button 
+                                    v-for="classe in classes" :key="classe.id" 
+                                    @click="currentClasse = classe" 
+                                    class="dropdown-item" type="button"
+                                >{{classe.nom}}</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <h2 class="mb-5">{{ className }}</h2>
+
+            <div class="row fill-height">
+                <div class="col">                    
+                    <div class="d-flex">
+                        <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
+                            Aujourd'hui
+                        </v-btn>
+                        <v-btn fab text small color="grey darken-2" @click="prev">
+                            <v-icon small>mdi-chevron-left</v-icon>
+                        </v-btn>
+                        <v-btn fab text small color="grey darken-2" @click="next">
+                            <v-icon small>mdi-chevron-right</v-icon>
+                        </v-btn>
+                        <v-toolbar-title v-if="$refs.calendar">
+                          {{ $refs.calendar.title }}
+                        </v-toolbar-title>
+
+
                         <div class="ml-auto btn-group">
-                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ typeSelected.name }}
-                            </button>
+                            <!-- Button trigger modal -->
+                            <v-btn class="bg-secondary text-white mr-3" elevation="10" x-small icon fab data-toggle="modal" data-target="#modalCalendar" @click.once="getDataToAddCours">
+                                <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                            <v-btn
+                                outlined
+                                color="grey darken-2"
+                                class="dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                >
+                                <span>{{ typeSelected.name }}</span>
+                            </v-btn>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <button 
                                     v-for="type in types" :key="type.key" 
                                     @click="typeSelected = type" 
                                     class="dropdown-item" type="button"
-                                >{{ type.name }}</button>
+                                >{{type.name}}</button>
                             </div>
                         </div>
                     </div>
                     
                     <v-calendar
                         ref="calendar"
+                        locale="fr"
                         :hide-header="false"
                         :interval-height="40"
                         :interval-width="40"
                         :short-weekdays="false"
                         v-model="focus"
-                        color="red"
                         :events="events"
+                        color="bg-primary"
                         event-overlap-mode="column"
                         :event-color="getEventColor"
                         :type="typeSelected.key"
@@ -62,7 +154,14 @@
                         @click:more="viewDay"
                         @click:date="viewDay"
                         @change="updateRange"
-                    ></v-calendar>
+                    >
+                    <template v-slot:event="{ event, timed, eventSummary }">
+                        <div
+                            :style="{backgroundColor: event.color, color: colorAboutBG(event.color)}"
+                            v-html="eventSummary()"
+                        ></div>
+                    </template>
+                    </v-calendar>
                     <v-menu
                         v-model="selectedOpen"
                         :close-on-content-click="false"
@@ -99,7 +198,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script> 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
@@ -109,6 +208,52 @@
 
         
         <script>
+            Vue.filter('fullName', function (character) {
+                if (!(character instanceof Object)) { return '' }
+
+                let fullNameArray = []
+                if (character.prenom) fullNameArray.push(character.prenom)
+                if (character.nom) fullNameArray.push(character.nom)
+
+                return fullNameArray.join(" ")
+            })
+
+            Vue.component('modal', {
+                props: {
+                    ok: {
+                        type: String,
+                        default: "Valider"
+                    },
+                    cancel: {
+                        type: String,
+                        default: "Annuler"
+                    },
+                    submit: {
+                        type: Function,                        
+                    }
+                },
+                template: 
+                    `<div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="modalCalendar" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCalendar">Ajouter un cours</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <slot></slot>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ cancel }}</button>
+                                <button type="button" class="btn btn-primary" @click.prevent="submit">{{ ok }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            })
+
             var app = new Vue({
                 el:"#App",
                 vuetify: new Vuetify({
@@ -117,14 +262,38 @@
                     },
                 }),
                 
-                data:{
+                data: {
                     focus: "",
+                    currentClasse: { id: 1, nom: "LP PROG" },
+                    classes: [
+                        { id: "all", nom: "Toutes les classes" },
+                        { id: 1, nom: "LP PROG" },
+                        { id: 2, nom: "Littéraire" },
+                    ],
+                    salles: [],
+                    professeurs: [],
                     typeSelected: { key: "day", name: "Jour" },
                     types: [
                         { key: "day", name: "Jour" },
                         { key: "week", name: "Semaine" },
                         { key: "month", name: "Mois" },
                     ],
+                    matieres: [
+                        { id: 1, titre: "Web Avancé", reference: "WA" },
+                        { id: 2, titre: "Philosophie", reference: "PH" },
+                    ],
+                    coursFormData: {
+                        dateHeureDebut: "11-03-2021 15:00:00",
+                        dateHeureFin: "11-03-2021 17:00:00",
+                        type: undefined,
+                        couleur:"#FFAAFF",
+                        salle: undefined,
+                        professeur: undefined,
+                        matiere: undefined,
+                        classe: undefined,
+                    },
+                    errors: [],
+                    alert: true,
                     selectedEvent: {},
                     selectedElement: null,
                     selectedOpen: false,
@@ -136,6 +305,13 @@
                 mounted() {
                     this.$refs.calendar.checkChange()
                 },
+                computed: {
+                    className() {
+                        return this.currentClasse.id === "all"
+                            ? this.currentClasse.nom
+                            : "Classe de " + this.currentClasse.nom
+                    }
+                },
                 methods:{
                     getCours(period) {
                         axios.get(`/api/cours/${period}`)
@@ -143,12 +319,12 @@
                             let cours = response.data
                             let events = []
 
-                            cours.forEach(element => {                                
+                            cours.forEach(element => {                             
                                 events.push({
-                                    name: `[${element.matiere.reference}] ${element.matiere.titre} ${element.type} ${element.salle.numero} ${this.fullName(element.professeur)}`,
+                                    name: `[${element.matiere.reference}] ${element.matiere.titre} ${element.type} ${element.salle.numero} ${this.$options.filters.fullName(element.professeur)}`,
                                     start: this.convertirDate(element.dateHeureDebut),
                                     end: this.convertirDate(element.dateHeureFin),
-                                    color: "red",
+                                    color: element.couleur || "#fff",
                                     timed: true,
                                 })
                             })
@@ -156,6 +332,53 @@
                         })
                         .catch(error => {
                             console.log(error)
+                        })
+                    },
+                    getSalles() {
+                        axios.get("/api/salles")
+                        .then(response => {
+                            this.salles = response.data
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    },
+                    getProfesseurs() {
+                        axios.get("/api/professeurs")
+                        .then(response => {
+                            this.professeurs = response.data
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    },
+                    getDataToAddCours() {
+                        this.getSalles()
+                        this.getProfesseurs()
+                    },
+
+                    submitForm(evt) {    
+                        this.errors = []
+                        // dateHeureDebut: "11-03-2021 15:00:00",
+                        // dateHeureFin: "11-03-2021 17:00:00",      
+
+                        if (!this.coursFormData.type) this.errors.push("Le type de cours est requis")
+                        if (!this.coursFormData.salle) this.errors.push("La salle de cours est requise")
+                        if (!this.coursFormData.professeur) this.errors.push("Le professeur est requis")
+                        if (!this.coursFormData.matiere) this.errors.push("La matière est requise")
+                        if (!this.coursFormData.classe) this.errors.push("La classe est requise")
+
+                        if (!this.errors.length) this.postCours()
+                    },
+
+                    postCours() {
+                        axios.post("/api/cours/", this.coursFormData)
+                        .then(response => {
+                            this.avis.push(response.data);
+                            this.nouvelAvis = this.newAvis();
+                        })
+                        .catch(error => {
+                            // this.errors = Object.values(error.response.data);
                         })
                     },
 
@@ -168,18 +391,13 @@
                         day = day.split("-").reverse().join("-")
                         return day + time
                     },
-                    fullName(professeur) {
-                        return professeur.prenom + " " + professeur.nom
-                    },
 
                     // Vuetify
                     viewDay ({ date }) {
-                        console.log(date)
                         this.focus = date
                         this.typeSelected = { key: "day", name: "Jour" }
                     },
                     getEventColor (event) {
-                        console.log(event.color)
                         return event.color
                     },
                     setToday () {
@@ -212,11 +430,58 @@
                     updateRange ({ start, end }) {
                         let dateStartFR = this.convertirDate(start.date)
                         let dateEndFR = this.convertirDate(end.date)
-                        let urlParaM = `between/${dateStartFR}/${dateEndFR}`
+                        let urlParam = `between/${dateStartFR}/${dateEndFR}`
 
-                        this.getCours(urlParaM)
+                        this.getCours(urlParam)
                     },
+                    isLight(color) {
+                        // Variables for red, green, blue values
+                        var r, g, b, hsp;
+
+                        // Check the format of the color, HEX or RGB?
+                        if (color.match(/^rgb/)) {
+                            // If RGB --> store the red, green, blue values in separate variables
+                            color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+                            
+                            r = color[1];
+                            g = color[2];
+                            b = color[3];
+                        } 
+                        else {                            
+                            // If hex --> Convert it to RGB: http://gist.github.com/983661
+                            color = +("0x" + color.slice(1).replace( 
+                            color.length < 5 && /./g, '$&$&'));
+
+                            r = color >> 16
+                            g = color >> 8 & 255
+                            b = color & 255
+                        }
+
+                        // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
+                        hsp = Math.sqrt(
+                            0.299 * (r * r) +
+                            0.587 * (g * g) +
+                            0.114 * (b * b)
+                        )
+
+                        // Using the HSP value, determine whether the color is light or dark
+                        return hsp<127.5
+                    },
+                    colorAboutBG(bg) {
+                        return bg 
+                            ? (this.isLight(bg) ? "#fff" : "#111")
+                            : undefined
+                    }
                 },
+
+                watch: {
+                    currentClasse: {
+                        handler: function(newCurrentClasse) {
+                            this.coursFormData.classe = newCurrentClasse.id
+                        },
+                        immediate: true,
+                    }
+                }
             });
         </script>
     </body>

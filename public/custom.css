@@ -1,3 +1,11 @@
 .theme--light.v-btn.v-btn--has-bg  {
     /* background-color: blue; */
 }
+
+.bg-primary {
+    color: white !important;
+}
+
+.v-alert__border--left {
+    left: 0;
+}
