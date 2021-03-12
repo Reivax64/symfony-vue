@@ -78,7 +78,7 @@
                     </div>
                 </v-alert>
                 <v-alert v-show="success" dismissible color="bg-success" icon="mdi-check-circle-outline" class="text-white" border="left" transition="scale-transition">
-                    <p class="ml-3">Super!</p>
+                    <p class="ml-3">{{ success }}</p>
                 </v-alert>
             </modal>
 
@@ -132,9 +132,7 @@
                           {{ $refs.calendar.title }}
                         </v-toolbar-title>
 
-
                         <div class="ml-auto btn-group">
-                            <!-- Button trigger modal -->
                             <v-btn class="bg-secondary text-white mr-3" elevation="10" x-small icon fab data-toggle="modal" data-target="#modalCreateCours" @click.once="getDataToAddCours">
                                 <v-icon>mdi-plus</v-icon>
                             </v-btn>
@@ -164,17 +162,17 @@
                         @click:date="viewDay"
                         @change="updateRange"
                     >
-                    <template v-slot:event="{ event }">
-                        <div
-                            :class="{'ml-md-3 mt-md-1': typeSelected.key === 'day'}"
-                            :style="{backgroundColor: event.color, color: colorAboutBG(event.color), height: '100%'}"
-                            data-toggle="modal" :data-target="'#cours-'+event.id"
-                        >
-                            {{ event.properties.matiere.titre }}<br />
-                            <div>{{ event.properties.type }} avec {{ event.properties.professeur | fullName }}</div>
-                            <div><i>{{ event.properties.dateHeureDebut | getTime }} - {{ event.properties.dateHeureFin | getTime }} | {{ event.properties.salle.numero }}</i></div>
-                        </div>
-                    </template>
+                        <template v-slot:event="{ event }">
+                            <div
+                                :class="{'ml-md-3 mt-md-1': typeSelected.key === 'day'}"
+                                :style="{backgroundColor: event.color, color: colorAboutBG(event.color), height: '100%'}"
+                                data-toggle="modal" :data-target="'#cours-'+event.id"
+                            >
+                                {{ event.properties.matiere.titre }}<br />
+                                <div>{{ event.properties.type }} avec {{ event.properties.professeur | fullName }}</div>
+                                <div><i>{{ event.properties.dateHeureDebut | getTime }} - {{ event.properties.dateHeureFin | getTime }} | {{ event.properties.salle.numero }}</i></div>
+                            </div>
+                        </template>
                     </v-calendar>
 
                     <modal 
@@ -219,7 +217,10 @@
         
         <script>
             Vue.filter('fullName', function (character) {
-                if (!(character instanceof Object)) { return '' }
+                if (!(character instanceof Object)) { 
+                    console.error("Le filtre fullName() doit s'appliquer sur un Object, et non sur : " + typeof date)
+                    return ""
+                }
 
                 let fullNameArray = []
                 if (character.prenom) fullNameArray.push(character.prenom)
@@ -230,7 +231,7 @@
 
             Vue.filter('getTime', function (date) {
                 if ((typeof date !== 'string')) { 
-                    console.error("Le filtre getTime() doit s'appliquer sur un string, et non sur " + typeof date)
+                    console.error("Le filtre getTime() doit s'appliquer sur un String, et non sur " + typeof date)
                     return '' 
                 }
 

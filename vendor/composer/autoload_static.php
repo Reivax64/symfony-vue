@@ -29,6 +29,7 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
         ),
         'S' => 
         array (
+            'Symfony\\WebpackEncoreBundle\\' => 28,
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
@@ -133,6 +134,10 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Symfony\\WebpackEncoreBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src',
         ),
         'Symfony\\Polyfill\\Uuid\\' => 
         array (
@@ -452,6 +457,7 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
 
     public static $classMap = array (
         'App\\Controller\\Admin\\AvisCrudController' => __DIR__ . '/../..' . '/src/Controller/Admin/AvisCrudController.php',
+        'App\\Controller\\Admin\\ClasseCrudController' => __DIR__ . '/../..' . '/src/Controller/Admin/ClasseCrudController.php',
         'App\\Controller\\Admin\\CoursCrudController' => __DIR__ . '/../..' . '/src/Controller/Admin/CoursCrudController.php',
         'App\\Controller\\Admin\\DashboardController' => __DIR__ . '/../..' . '/src/Controller/Admin/DashboardController.php',
         'App\\Controller\\Admin\\MatiereCrudController' => __DIR__ . '/../..' . '/src/Controller/Admin/MatiereCrudController.php',
@@ -459,8 +465,10 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
         'App\\Controller\\Admin\\SalleCrudController' => __DIR__ . '/../..' . '/src/Controller/Admin/SalleCrudController.php',
         'App\\Controller\\Api\\CoursController' => __DIR__ . '/../..' . '/src/Controller/Api/CoursController.php',
         'App\\Controller\\Api\\ProfesseurController' => __DIR__ . '/../..' . '/src/Controller/Api/ProfesseurController.php',
+        'App\\Controller\\Api\\SalleController' => __DIR__ . '/../..' . '/src/Controller/Api/SalleController.php',
         'App\\Controller\\ProfesseurController' => __DIR__ . '/../..' . '/src/Controller/ProfesseurController.php',
         'App\\Entity\\Avis' => __DIR__ . '/../..' . '/src/Entity/Avis.php',
+        'App\\Entity\\Classe' => __DIR__ . '/../..' . '/src/Entity/Classe.php',
         'App\\Entity\\Cours' => __DIR__ . '/../..' . '/src/Entity/Cours.php',
         'App\\Entity\\Matiere' => __DIR__ . '/../..' . '/src/Entity/Matiere.php',
         'App\\Entity\\Professeur' => __DIR__ . '/../..' . '/src/Entity/Professeur.php',
@@ -469,10 +477,13 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
         'App\\Form\\ProfesseurType' => __DIR__ . '/../..' . '/src/Form/ProfesseurType.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'App\\Repository\\AvisRepository' => __DIR__ . '/../..' . '/src/Repository/AvisRepository.php',
+        'App\\Repository\\ClasseRepository' => __DIR__ . '/../..' . '/src/Repository/ClasseRepository.php',
         'App\\Repository\\CoursRepository' => __DIR__ . '/../..' . '/src/Repository/CoursRepository.php',
         'App\\Repository\\MatiereRepository' => __DIR__ . '/../..' . '/src/Repository/MatiereRepository.php',
         'App\\Repository\\ProfesseurRepository' => __DIR__ . '/../..' . '/src/Repository/ProfesseurRepository.php',
         'App\\Repository\\SalleRepository' => __DIR__ . '/../..' . '/src/Repository/SalleRepository.php',
+        'App\\Validator\\Cours' => __DIR__ . '/../..' . '/src/Validator/Cours.php',
+        'App\\Validator\\CoursValidator' => __DIR__ . '/../..' . '/src/Validator/CoursValidator.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -4479,6 +4490,23 @@ class ComposerStaticInitb1250e61877dd237e13d839fe7ffce94
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\EntrypointLookup' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/EntrypointLookup.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\EntrypointLookupCollection' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/EntrypointLookupCollection.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\EntrypointLookupCollectionInterface' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/EntrypointLookupCollectionInterface.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\EntrypointLookupInterface' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/EntrypointLookupInterface.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\IntegrityDataProviderInterface' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/IntegrityDataProviderInterface.php',
+        'Symfony\\WebpackEncoreBundle\\Asset\\TagRenderer' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Asset/TagRenderer.php',
+        'Symfony\\WebpackEncoreBundle\\CacheWarmer\\EntrypointCacheWarmer' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/CacheWarmer/EntrypointCacheWarmer.php',
+        'Symfony\\WebpackEncoreBundle\\DependencyInjection\\Configuration' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/DependencyInjection/Configuration.php',
+        'Symfony\\WebpackEncoreBundle\\DependencyInjection\\WebpackEncoreExtension' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/DependencyInjection/WebpackEncoreExtension.php',
+        'Symfony\\WebpackEncoreBundle\\EventListener\\ExceptionListener' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/EventListener/ExceptionListener.php',
+        'Symfony\\WebpackEncoreBundle\\EventListener\\PreLoadAssetsEventListener' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/EventListener/PreLoadAssetsEventListener.php',
+        'Symfony\\WebpackEncoreBundle\\Event\\RenderAssetTagEvent' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Event/RenderAssetTagEvent.php',
+        'Symfony\\WebpackEncoreBundle\\Exception\\EntrypointNotFoundException' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Exception/EntrypointNotFoundException.php',
+        'Symfony\\WebpackEncoreBundle\\Exception\\UndefinedBuildException' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Exception/UndefinedBuildException.php',
+        'Symfony\\WebpackEncoreBundle\\Twig\\EntryFilesTwigExtension' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Twig/EntryFilesTwigExtension.php',
+        'Symfony\\WebpackEncoreBundle\\Twig\\StimulusTwigExtension' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/Twig/StimulusTwigExtension.php',
+        'Symfony\\WebpackEncoreBundle\\WebpackEncoreBundle' => __DIR__ . '/..' . '/symfony/webpack-encore-bundle/src/WebpackEncoreBundle.php',
         'Twig\\Cache\\CacheInterface' => __DIR__ . '/..' . '/twig/twig/src/Cache/CacheInterface.php',
         'Twig\\Cache\\FilesystemCache' => __DIR__ . '/..' . '/twig/twig/src/Cache/FilesystemCache.php',
         'Twig\\Cache\\NullCache' => __DIR__ . '/..' . '/twig/twig/src/Cache/NullCache.php',
