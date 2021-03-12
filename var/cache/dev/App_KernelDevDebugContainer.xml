@@ -5157,13 +5157,6 @@
         <argument key="repository" type="service" id="App\Repository\CoursRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.88DCWcy" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="classe" type="service" id=".errored..service_locator.88DCWcy.App\Entity\Classe"/>
-        <argument key="repository" type="service" id="App\Repository\CoursRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.DPyAAGX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5227,7 +5220,7 @@
         <argument key="professeur" type="service" id=".errored..service_locator..ewpm5Q.App\Entity\Professeur"/>
       </argument>
     </service>
-    <service id=".service_locator._w_5TDd" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.V8mRX2Z" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AvisCrudController::autocomplete" type="service" id=".service_locator.ZOQ9v2d"/>
@@ -5353,9 +5346,9 @@
         <argument key="App\Controller\Admin\SalleCrudController::updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Api\ClasseController::index" type="service" id=".service_locator.sUHcgGX"/>
         <argument key="App\Controller\Api\CoursController::addDays" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController::addDaysByClasse" type="service" id=".service_locator.88DCWcy"/>
+        <argument key="App\Controller\Api\CoursController::addDaysByClasse" type="service" id=".service_locator.tkRYZ.N"/>
         <argument key="App\Controller\Api\CoursController::between" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController::betweenByClasse" type="service" id=".service_locator.88DCWcy"/>
+        <argument key="App\Controller\Api\CoursController::betweenByClasse" type="service" id=".service_locator.tkRYZ.N"/>
         <argument key="App\Controller\Api\CoursController::createCours" type="service" id=".service_locator.DPyAAGX"/>
         <argument key="App\Controller\Api\CoursController::index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController::indexByClasse" type="service" id=".service_locator.tkRYZ.N"/>
@@ -5500,9 +5493,9 @@
         <argument key="App\Controller\Admin\SalleCrudController:updateEntity" type="service" id=".service_locator.l2QwsaZ"/>
         <argument key="App\Controller\Api\ClasseController:index" type="service" id=".service_locator.sUHcgGX"/>
         <argument key="App\Controller\Api\CoursController:addDays" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController:addDaysByClasse" type="service" id=".service_locator.88DCWcy"/>
+        <argument key="App\Controller\Api\CoursController:addDaysByClasse" type="service" id=".service_locator.tkRYZ.N"/>
         <argument key="App\Controller\Api\CoursController:between" type="service" id=".service_locator.e1La3as"/>
-        <argument key="App\Controller\Api\CoursController:betweenByClasse" type="service" id=".service_locator.88DCWcy"/>
+        <argument key="App\Controller\Api\CoursController:betweenByClasse" type="service" id=".service_locator.tkRYZ.N"/>
         <argument key="App\Controller\Api\CoursController:createCours" type="service" id=".service_locator.DPyAAGX"/>
         <argument key="App\Controller\Api\CoursController:index" type="service" id=".service_locator.e1La3as"/>
         <argument key="App\Controller\Api\CoursController:indexByClasse" type="service" id=".service_locator.tkRYZ.N"/>
@@ -5956,12 +5949,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContextProvider"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator._w_5TDd"/>
+      <argument type="service" id=".service_locator.V8mRX2Z"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator._w_5TDd"/>
+      <argument type="service" id=".service_locator.V8mRX2Z"/>
     </service>
     <service id=".errored..service_locator.KfwZsne.Symfony\Component\HttpFoundation\Response" class="Symfony\Component\HttpFoundation\Response"/>
     <service id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
@@ -5979,7 +5972,6 @@
     <service id=".errored..service_locator.tbo4Jjv.EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore" class="EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore"/>
     <service id=".errored..service_locator.2dc0eaX.EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore" class="EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore"/>
     <service id=".errored..service_locator.q6hA_O0.Symfony\Component\Security\Core\User\UserInterface" class="Symfony\Component\Security\Core\User\UserInterface"/>
-    <service id=".errored..service_locator.88DCWcy.App\Entity\Classe" class="App\Entity\Classe"/>
     <service id=".errored..service_locator..ewpm5Q.App\Entity\Professeur" class="App\Entity\Professeur"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
@@ -6294,7 +6286,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator._w_5TDd"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.V8mRX2Z"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.Mo0FXEU" alias="service_locator_EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>

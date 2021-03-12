@@ -154,3 +154,25 @@ Nous pouvons également créer un cours. Après les étapes décrites plus haut 
 ```
 
 Le terme ".once" permet d'exécuter qu'une seule fois l'action suivante. Cela permet d'éviter de faire des requetes API inutiles.
+
+
+Nous informons l'utilisateur des erreurs qu'il commet lors de sa création de cours via texte sous le formulaire. Ce message est généré par ce code :
+
+```JS
+submitForm() {    
+    this.errors = []     
+    this.success = null
+
+    if (!this.coursFormData.type) this.errors.push("Le type de cours est requis")
+    if (!this.coursFormData.salle) this.errors.push("La salle de cours est requise")
+    if (!this.coursFormData.professeur) this.errors.push("Le professeur est requis")
+    if (!this.coursFormData.matiere) this.errors.push("La matière est requise")
+    if (!this.coursFormData.classe) this.errors.push("La classe est requise")
+
+    if (!this.errors.length) this.postCours()
+},
+```
+
+Si l'api renvoie des erreurs, alors de la meme facon, le tableau array en sera agrandi.
+Egalement, si la création s'effectue, un message, via la data 'success', viendra l'en informé.
+Dans ce cas, le cours est automatiquement ajouté au calendrier
