@@ -10,6 +10,7 @@ use App\Repository\ProfesseurRepository;
 use App\Repository\MatiereRepository;
 use App\Repository\SalleRepository;
 use App\Repository\ClasseRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -38,8 +39,14 @@ class CoursController extends AbstractController
     /**
      * @Route("/classe/{id}",name="by_classe",methods={"GET"})
      */
-    public function indexByClasse(Classe $classe, CoursRepository $repository) :Response
+    public function indexByClasse(Classe $classe = null, CoursRepository $repository) :Response
     {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
+
         $cours = $repository->findBy(
             ['classe' => $classe->getId()]
         );
@@ -64,8 +71,14 @@ class CoursController extends AbstractController
     /**
      * @Route("/classe/{id}/today",name="_today_by_classe",methods={"GET"})
      */
-    public function todayByClasse(Classe $classe, CoursRepository $repository) :Response
+    public function todayByClasse(Classe $classe = null, CoursRepository $repository) :Response
     {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
+
         $now = new \DateTime();
 
         $cours = $repository->getByDate($now,$classe);
@@ -79,6 +92,8 @@ class CoursController extends AbstractController
      */
     public function between(CoursRepository $repository,$datedebut,$dateend) :Response
     {
+        
+
         $datetime = new \DateTime();
         $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
         $end = $datetime->createFromFormat('d-m-Y', $dateend);
@@ -93,8 +108,13 @@ class CoursController extends AbstractController
     /**
      * @Route("/classe/{id}/between/{datedebut}/{dateend}",name="_between_by_classe",methods={"GET"})
      */
-    public function betweenByClasse(CoursRepository $repository,Classe $classe,$datedebut,$dateend) :Response
+    public function betweenByClasse(CoursRepository $repository,Classe $classe = null,$datedebut,$dateend) :Response
     {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
         $datetime = new \DateTime();
         $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
         $end = $datetime->createFromFormat('d-m-Y', $dateend);
@@ -124,8 +144,13 @@ class CoursController extends AbstractController
     /**
      * @Route("/classe/{id}/days/{nb_add_days}",name="_add_days_by_classe",methods={"GET"})
      */
-    public function addDaysByClasse(Classe $classe,CoursRepository $repository,int $nb_add_days) :Response
+    public function addDaysByClasse(Classe $classe = null,CoursRepository $repository,int $nb_add_days) :Response
     {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
         $datetime = new \DateTime();
         $date = $datetime->modify('+'.$nb_add_days.' day');
 
