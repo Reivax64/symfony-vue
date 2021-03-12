@@ -356,10 +356,10 @@
                 },
                 methods: {
                     getClasses() {
-                        axios.get('/api/cours')
+                        axios.get('/api/salles')
                         .then(response => {
-                            let classes = { id: "all", nom: "Toutes les classes" }
-                            response.forEach((classe) => {
+                            let classes = [{ id: "all", nom: "Toutes les classes" }]
+                            response.data.forEach((classe) => {
                                 classes.push(classe)
                             })
                             this.classes = classes
