@@ -16,6 +16,7 @@ return [
         '/api/cours/today' => [[['_route' => 'api_cours_today', '_controller' => 'App\\Controller\\Api\\CoursController::today'], null, ['GET' => 0], null, false, false, null]],
         '/api/professeurs' => [[['_route' => 'api_professeurs_index', '_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/salles' => [[['_route' => 'api_cours_index', '_controller' => 'App\\Controller\\Api\\SalleController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/professeurs' => [[['_route' => 'professeurs_index', '_controller' => 'App\\Controller\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/professeurs/create' => [[['_route' => 'professeurs_create', '_controller' => 'App\\Controller\\ProfesseurController::create'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
     ],
