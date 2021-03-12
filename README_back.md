@@ -536,7 +536,10 @@ class CoursValidator extends ConstraintValidator
 ```
 Voici le code qui va nous permettre de vérifier les erreurs de validation, le principe, prendre notre objet Cours courant ($protocol), prendre la liste des cours qui ont lieu à la même date, et vérifier si le professeur, la salle, et la classe sont différents.
 
-Nous voyons aussi que dans le constructeur, nous avons du passer un objet CoursRepository, indispensable pour pouvoir chercher les cours. 
+Nous voyons aussi que dans le constructeur, nous avons du passer un objet CoursRepository, indispensable pour pouvoir chercher les cours.
+
+Nous voyons une fonction getInSameCreneau() de cours repository, en effet, nous avons du créer une nouvelle fonction permettant de récupérer les cours dans le même créneau qu'une date donnée : 
+
 
 dans CoursRepository : 
 ```PHP
@@ -557,118 +560,551 @@ dans CoursRepository :
         return $result;
     }
 ```
-Création des fonctions CRUD dans /admin
 
-## API
-
-### Cours 
-
-Création d'un controlleur /Controller/API/CoursController.php qui répondra à l'url /api/cours
-route : 
-@Route("/api/cours", name="api_cours_")
-
-
-
-url : /api/cours ==> renvoie listing de tous les cours 
-route : 
-    @Route("",name="index",methods={"GET"})
-code : 
+Maintenat, pour binder notre validator à notre objet cours, nous utiliserons l'anotation : 
 ```PHP
+    /**
+     * @ORM\Entity(repositoryClass=CoursRepository::class)
+     * @c_validator
+     */
+
+```
+devant notre classe cours.
+
+
+**les erreurs rencontrées pendant cette partie :** 
+- Nous avons mis du temps à comprendre comment faire en sorte de passer une validator à notre objet cours.
+- Utiliser le coursRepository dans notre validator n'était pas possible sans passer par le constructeur.
+- Les erreurs s'affichent bien en se commulant dans l'admin CRUD, mais lors de l'envoie à l'api, elle ne se cummule pas. Nous n'avons pas encore trouvé de solution.
+
+
+
+Maintenant nous pouvons créer nos fonctions CRUD : 
+
+
+### Création des fonctions CRUD dans /admin
+
+La création des crud se fait assez facilement grâce au cmd. 
+Mais dans ce chapitre nous verons plus précisément, l'affichage des inputs dans CoursCrudController.
+
+
+```PHP
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            'dateHeureDebut',
+            'dateHeureFin',
+            ChoiceField::new('type')->setChoices(["COURS"=> "COURS", "TP" => "TP", "TD" => "TD"])->renderAsNativeWidget(),
+            ColorField::new('couleur'),
+            AssociationField::new('salle')->setFormTypeOptions(['by_reference' => false]),
+            AssociationField::new('classe')->setFormTypeOptions(['by_reference' => false]),
+            AssociationField::new('professeur')->setFormTypeOptions(['by_reference' => false]),
+            AssociationField::new('matiere')->setFormTypeOptions(['by_reference' => false]),
+        ];
+    }
+```
+Nous avons donc du surchargé la méthode configureFields, Pour faire en sorte de respecter plusieurs critères : 
+- Un choiceFields pour le **type** de corus (TD/TP/COURS) afin d'éviter d'avoir trop de type différent.
+- Un ColorField, permettant de choisir une couleur de fond pour les **cours**.
+- AssiciationField pour **salle**, **classe**, **professeur** & **matiere**. Permettant de ne pas renseigner des données qui n'existe pas
+
+**les erreurs rencontrées pendant cette partie :** 
+- Pas beaucoup d'erreur en particulier, mais nous aurions aimé pouvoir initialiser les minutes de nos DatetimeField à 00 ou 30, afin de faciliter la saisi. Mais par manque de temps, nous n'avons pas réussi. 
+
+
+
+### API
+
+Pour faire ne sorte de communiquer avec le front, nous avons donc du créer plusieurs API. Certaines, plus poussées que d'autres. 
+
+Commençons par les plus simples, qui implémenterons seulement des méthods GET pour récupérer des données. Ici, les salles, les classes et les matieres.
+
+**/api/MatiereController**
+
+```PHP
+    /**
+  * @Route("/api/matiere", name="api_matiere_")
+  */
+    class MatiereController extends AbstractController
+    {
+        /**
+         * @Route("",name="index",methods={"GET"})
+         */
+        public function index(MatiereRepository $repository): Response
+        {
+            $matieres = $repository->findAll();
+
+            return $this->json($matieres,200);
+        }
+    }
+```
+Route : /api/matiere
+Methods : get
+Code: 200. 
+
+Récupère toutes les matières & les renvoies sous forme JSON. 
+Pour ce faire, nous avons du implémenté la fonction JsonSerialise dans Entity\Matiere.php
+
+```PHP 
+public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'titre' => $this->titre,
+            'reference' => $this->reference,
+        ];
+    }
+```
+
+**/api/ClasseController**
+
+```PHP
+   /**
+  * @Route("/api/classe", name="api_classe_")
+  */
+    class ClasseController extends AbstractController
+    {
+        /**
+         * @Route("",name="index",methods={"GET"})
+         */
+        public function index(ClasseRepository $repository): Response
+        {
+            $classes = $repository->findAll();
+
+            return $this->json($classes,200);
+        }
+    }
+```
+Route : /api/classe
+Methods : get
+Code: 200. 
+
+Récupère toutes les classes & les renvoies sous forme JSON. 
+Pour ce faire, nous avons du implémenté la fonction JsonSerialise dans Entity\Classe.php
+
+```PHP 
+public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+        ];
+    }
+```
+
+**/api/SalleController**
+
+```PHP
+
+/**
+  * @Route("/api/salles", name="api_cours_")
+  */
+class SalleController extends AbstractController
+{
+    /**
+     * @Route("",name="index",methods={"GET"})
+     */
+    public function index(SalleRepository $repository): Response
+    {
+        $cours = $repository->findAll();
+
+        return $this->json($cours,200);
+    }
+
+    /**
+     * @Route("/{id}",name="detail",methods={"GET"})
+     */
+    public function detail(Salle $salle = null): Response
+    {
+        if(!$salle){
+            return new JsonResponse([
+                "message" => "Salle inexistante"
+            ], 404);
+        }
+        return $this->json($salle,200);
+    }
+}  
+```
+1 - 
+
+Route : /api/salles
+Methods : get
+Code: 200. 
+
+Récupère toutes les salles & les renvoies sous forme JSON. 
+
+2 - 
+
+Route : /api/salles/{id}
+Methods : get
+Code: 200 ou 404 si la salle n'existe pas
+
+Récupère la salle & la renvoie sous forme JSON. 
+
+
+Pour ce faire, nous avons du implémenté la fonction JsonSerialise dans Entity\Classe.php
+
+```PHP 
+public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'numero' => $this->numero,
+        ];
+    }
+```
+
+
+Maintenant, plus complexe. L'api de cours: 
+
+**/api/CoursController**
+
+Nous avons du séparer notre api en 2 étapes, récupérer les cours dans classes (donc, tous les cours) et les récupérer, par classe.
+
+Déjà, commençons pas la déclaration de l'url en /api/cours : 
+
+```PHP 
+ /**
+  * @Route("/api/cours", name="api_cours")
+  */
+class CoursController extends AbstractController
+{
+```
+
+**Listing**
+
+
+```PHP 
+ /**
+     * @Route("",name="",methods={"GET"})
+     */
     public function index(CoursRepository $repository) :Response
     {
-        $cours = $repository->findAll(); // récupère tous les cours
+        $cours = $repository->findAll();
 
-        return $this->json($cours,200); // renvoie la list
+        return $this->json($cours,200);
+
+    }
+```
+Route : /api/cours
+Methods : get
+Code: 200
+
+Récupère tous les cours de toutes les classes & les renvoies sous forme JSON. 
+
+```PHP 
+/**
+     * @Route("/classe/{id}",name="by_classe",methods={"GET"})
+     */
+    public function indexByClasse(Classe $classe = null, CoursRepository $repository) :Response
+    {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
+
+        $cours = $repository->findBy(
+            ['classe' => $classe->getId()]
+        );
+
+        return $this->json($cours,200);
+
+    }
+```
+Route : /api/cours/classe/{id}
+Methods : get
+Code: 200 ou 404 si la classe n'existe pas
+
+Récupère tous les cours en fonction de la classe & les renvoies sous forme JSON. 
+
+Ces routes ne seront pas très utile pour le Front, mais pour débuguer, elles le seront.
+
+
+**Listing du jour**
+
+```PHP 
+    /**
+     * @Route("/today",name="_today",methods={"GET"})
+     */
+    public function today(CoursRepository $repository) :Response
+    {
+        $now = new \DateTime();
+
+        $cours = $repository->getByDate($now);
+
+        return $this->json($cours,200);
 
     }
 ```
 
-url : /api/cours/today => récuère les cours du jour
-    route : 
-        @Route("/today",name="_today",methods={"GET"})
-    code : 
-```PHP
-        public function today(CoursRepository $repository) :Response
-        {
-            $now = new \DateTime(); //init date du jour
+Route : /api/cours/today
+Methods : get
+Code: 200
 
-            $cours = $repository->getByDate($now); //récupère les cours en fonction d'une date
+Récupère tous les cours du jour actuel & les renvoies sous forme JSON. 
 
-            return $this->json($cours,200); //renvoie la lst 
 
+```PHP 
+   /**
+     * @Route("/classe/{id}/today",name="_today_by_classe",methods={"GET"})
+     */
+    public function todayByClasse(Classe $classe = null, CoursRepository $repository) :Response
+    {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
         }
-```
-    dans CoursRepository : ajouter une fct qui cherche par date 
-```PHP
-    public function getByDate(\Datetime $date)
-        {
-            $from = new \DateTime($date->format("Y-m-d")." 00:00:00"); // prend la première valeur
-            $to   = new \DateTime($date->format("Y-m-d")." 23:59:59"); // et la dernière
+        
+        $now = new \DateTime();
 
-            $qb = $this->createQueryBuilder("e"); //construit notr requete
-            $qb
-                ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
-                ->setParameter('from', $from )
-                ->setParameter('to', $to)
-            ;
-            $result = $qb->getQuery()->getResult();
+        $cours = $repository->getByDate($now,$classe);
 
-            return $result;
-        }
+        return $this->json($cours,200);
+    }
 ```
 
+Route : /api/cours/classe/{id}/today
+Methods : get
+Code: 200 ou 404 
 
-url : /api/cours/between/XX-XX-XXXX/XX-XX-XXXX => récupère les cours entre 2 dates
-    route : 
-        @Route("/between/{datedebut}/{dateend}",name="_between",methods={"GET"}
-    code : 
-```PHP
-        public function between(CoursRepository $repository,$datedebut,$dateend) :Response
-        {
-            $datetime = new \DateTime();
-            $debut = $datetime->createFromFormat('d-m-Y', $datedebut); // 
-            $end = $datetime->createFromFormat('d-m-Y', $dateend);
+Récupère tous les cours du jour actuel par classe & les renvoies sous forme JSON. 
 
-            $cours = $repository->getByDateBetween($debut,$end); // récupère es cours entre 2 dates
+**listing entre 2 dates**
 
-            return $this->json($cours,200); // renvoie la liste
 
-        }
-```
-    dans CoursRepository : ajouter une fct qui cherche entre 2 date
-```PHP
-    public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin)
-        {
-            $from = new \DateTime($datedebut->format("Y-m-d")." 00:00:00");
-            $to   = new \DateTime($datefin->format("Y-m-d")." 23:59:59");
+```PHP 
+    /**
+     * @Route("/between/{datedebut}/{dateend}",name="_between",methods={"GET"})
+     */
+    public function between(CoursRepository $repository,$datedebut,$dateend) :Response
+    {
+        
 
-            $qb = $this->createQueryBuilder("e");
-            $qb
-                ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
-                ->setParameter('from', $from )
-                ->setParameter('to', $to)
-            ;
-            $result = $qb->getQuery()->getResult();
+        $datetime = new \DateTime();
+        $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
+        $end = $datetime->createFromFormat('d-m-Y', $dateend);
 
-            return $result;
-        }
+
+        $cours = $repository->getByDateBetween($debut,$end);
+
+        return $this->json($cours,200);
+
+    }
 ```
 
-url : /api/cours/days/X => récupère les cours en fonction de la date d'aujourd'hui + X jours
-    route : 
-        @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
+Route : /api/cours/between/{datedebut}/{dateend}
+Methods : get
+Code: 200
 
-    code : 
-```PHP
-        public function addDays(CoursRepository $repository,int $nb_add_days) :Response
-        {
-            $datetime = new \DateTime();
-            $date = $datetime->modify('+'.$nb_add_days.' day');
-
-            $cours = $repository->getByDate($date);
+Récupère tous les cours entre 2 dates & les renvoies sous forme JSON. 
 
 
-            return $this->json($cours,200);
-
+```PHP 
+   /**
+     * @Route("/classe/{id}/between/{datedebut}/{dateend}",name="_between_by_classe",methods={"GET"})
+     */
+    public function betweenByClasse(CoursRepository $repository,Classe $classe = null,$datedebut,$dateend) :Response
+    {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
         }
+        $datetime = new \DateTime();
+        $debut = $datetime->createFromFormat('d-m-Y', $datedebut);
+        $end = $datetime->createFromFormat('d-m-Y', $dateend);
+
+
+        $cours = $repository->getByDateBetween($debut,$end,$classe);
+
+        return $this->json($cours,200);
+
+    }
 ```
+
+Route : /api/cours/classe/{id}/between/{datedebut}/{dateend}
+Methods : get
+Code: 200 ou 404
+
+Récupère tous les cours entre 2 dates par classe & les renvoies sous forme JSON. 
+
+**listing par jour sur un jour incrémenté**
+
+
+
+```PHP 
+   /**
+     * @Route("/days/{nb_add_days}",name="_add_days",methods={"GET"})
+     */
+    public function addDays(CoursRepository $repository,int $nb_add_days) :Response
+    {
+        $datetime = new \DateTime();
+        $date = $datetime->modify('+'.$nb_add_days.' day');
+
+        $cours = $repository->getByDate($date);
+
+
+        return $this->json($cours,200);
+
+    }
+```
+
+Route : /api/cours/days/{nb_days}
+Methods : get
+Code: 200
+
+Récupère tous les cours du jour actuel + nb_jour & les renvoies sous forme JSON. 
+
+
+```PHP 
+   /**
+     * @Route("/classe/{id}/days/{nb_add_days}",name="_add_days_by_classe",methods={"GET"})
+     */
+    public function addDaysByClasse(Classe $classe = null,CoursRepository $repository,int $nb_add_days) :Response
+    {
+        if(!$classe){
+            return new JsonResponse([
+                "message" => "Classe inexistante"
+            ], 404);
+        }
+        $datetime = new \DateTime();
+        $date = $datetime->modify('+'.$nb_add_days.' day');
+
+        $cours = $repository->getByDate($date,$classe);
+
+
+        return $this->json($cours,200);
+
+    }
+```
+
+Route : /api/cours/classe/{id}/days/{nb_days}
+Methods : get
+Code: 200 ou 404
+
+Récupère tous les cours du jour actuel + nb_jour par classe & les renvoies sous forme JSON. 
+
+
+**Création d'un cours**
+
+
+
+```PHP 
+   /**
+     * @Route("", name="create_cours", methods={"POST"})
+     */
+    public function createCours(Request $request,ValidatorInterface $validator,EntityManagerInterface $em,ProfesseurRepository $pr,MatiereRepository $mr,SalleRepository $sr,ClasseRepository $cr)
+    {
+        $data = json_decode($request->getContent(), true);
+        $prof = $pr->find($data["professeur"]);
+        $matiere = $mr->find($data["matiere"]);
+        $salle = $sr->find($data["salle"]);
+        $classe = $cr->find($data["classe"]);
+
+        $data["professeur"] = $prof;
+        $data["matiere"] = $matiere;
+        $data["salle"] = $salle;
+        $data["classe"] = $classe;
+        $cours = new Cours($data);
+        
+        $errors = $validator->validate($cours);
+
+        if ($errors->count() > 0){
+            $messages = [];
+            foreach($errors as $error){
+                $messages[$error->getPropertyPath()] = $error->getMessage();
+            }
+            return $this->json($messages, 400);
+        }
+        $em->persist($cours);
+        $em->flush();
+
+        return $this->json($cours, 200);
+
+    }
+```
+
+Route : /api/cours
+Methods : post
+Code: 200 ou 400
+
+Permet de créer un cours depuis un appel ajax en méthode Post
+
+
+
+**Pour réaliser cette api, nous avons du** 
+- Créer des fonctions dans le Repository de cours : 
+
+```PHP 
+   public function getByDate(\Datetime $date, Classe $classe = null)
+    {
+        $from = new \DateTime($date->format("Y-m-d")." 00:00:00");
+        $to   = new \DateTime($date->format("Y-m-d")." 23:59:59");
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        if($classe){
+            $qb->andWhere('e.classe = :classe')->setParameter('classe',  $classe->getId() );
+        }
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function getByDateBetween(\Datetime $datedebut,\Datetime $datefin, Classe $classe = null)
+    {
+        $from = new \DateTime($datedebut->format("Y-m-d")." 00:00:00");
+        $to   = new \DateTime($datefin->format("Y-m-d")." 23:59:59");
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.dateHeureDebut BETWEEN :from AND :to')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        if($classe){
+            $qb->andWhere('e.classe = :classe')->setParameter('classe',  $classe->getId() );
+        }
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+```
+
+- Modifier le constructeur de Cours.php pour construire un Cours via un tableau: 
+```PHP 
+public function __construct(array $data = [])
+    {
+        if(isset($data["dateHeureDebut"])){
+            $date = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureDebut"]);
+            $this->dateHeureDebut =$date;
+            
+        }
+        if(isset($data["dateHeureFin"])){
+            $dateF = \DateTime::createFromFormat('d-m-Y H:i:s', $data["dateHeureFin"]);
+            $this->dateHeureFin =$dateF;
+            
+        }
+        $this->type = $data["type"] ?? null;
+        $this->couleur = $data["couleur"] ?? null;
+
+        $this->salle = $data["salle"] ?? null;
+        $this->professeur = $data["professeur"] ?? null;
+        $this->matiere = $data["matiere"] ?? null;
+        $this->classe = $data["classe"] ?? null;
+    }
+```
+- mettre des Serialise dans toutes les classes impliquées.
+
+**Liste des erreurs et problèmes rencontrés** 
+- Du jour au lendemain, la route index ne répondait plus si nous métions un name. Nous n'avons toujours pas compris pourquoi. Alors que sur les autres api tous marches super. (Ceci était avec d'avoir les routes par classe, donc, pas de soucis de polymorphisme)
+- Les messages d'erreur liés à la création d'un cours ne se cummule pas.
+- Nous voulions faire des routes plus propre, comme par exemple /cours/today = renvoie les routes de la journée de toutes les classes. /cours/today/{id} = renvoie les cours de la journée de la classe choisit. Mais, des erreurs de conversion nous ont vite fait changé d'avis. Certainement du au faite que nous avons des routes demandant des datetimes. Qui prenaient visiblemnt le dessus par certain moment.
+
+

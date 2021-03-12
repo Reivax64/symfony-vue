@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\SalleRepository;
 use App\Entity\Salle;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
   * @Route("/api/salles", name="api_cours_")
@@ -31,7 +31,7 @@ class SalleController extends AbstractController
     {
         if(!$salle){
             return new JsonResponse([
-                "message" => ProfesseurController::PROFESSEUR_NOT_FOUND_MESSAGE
+                "message" => "Salle inexistante"
             ], 404);
         }
         return $this->json($salle,200);
