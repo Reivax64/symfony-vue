@@ -58,6 +58,11 @@ Vous pouvez maintenant allez sur http://localhost:8022/cours.html et voir ainsi 
 # Notre travail : 
 
 
+**Le projet**
+Nous avons réalisé toutes les consignes du projet. De plus, nous avons ajouté des classes permettant d'avoir plusieurs edt. Nous avons aussi mis la possibilité de créer un cours via une appel API. Mis une couleur en fond sur les cours. Crée Un validator personnalisé pour les cours. Mise en place d'autre api (/api/matiere && /api/classe). Mis en place des Field différent en fonction des critères demandés (ColorField par exemple). Mis la possiblité de voir les cours sur différentes dates... 
+
+Nous aurions aimé pouvoir faire de l'authentification, et faire en sorte qu'un utilisateur soit lié à une classe. Mais nous n'avions pas eu le temps.
+
 ## Back Office
 
 ### Base de donnée / Entity :

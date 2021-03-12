@@ -6,11 +6,18 @@ if (\class_exists(\ContainerBsW1ZMy\App_KernelDevDebugContainer::class, false)) 
     // no-op
 } elseif (!include __DIR__.'/ContainerBsW1ZMy/App_KernelDevDebugContainer.php') {
     touch(__DIR__.'/ContainerBsW1ZMy.legacy');
+=======
+if (\class_exists(\ContainerFLkc2gY\App_KernelDevDebugContainer::class, false)) {
+    // no-op
+} elseif (!include __DIR__.'/ContainerFLkc2gY/App_KernelDevDebugContainer.php') {
+    touch(__DIR__.'/ContainerFLkc2gY.legacy');
+>>>>>>> b75410dc5fea4b6dede6fd83917da1143d6393c9
 
     return;
 }
 
 if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
+<<<<<<< HEAD
     \class_alias(\ContainerBsW1ZMy\App_KernelDevDebugContainer::class, App_KernelDevDebugContainer::class, false);
 }
 
@@ -19,3 +26,24 @@ return new \ContainerBsW1ZMy\App_KernelDevDebugContainer([
     'container.build_id' => '6494e98a',
     'container.build_time' => 1615546959,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerBsW1ZMy');
+=======
+<<<<<<< HEAD
+    \class_alias(\ContainerQfnW78b\App_KernelDevDebugContainer::class, App_KernelDevDebugContainer::class, false);
+}
+
+return new \ContainerQfnW78b\App_KernelDevDebugContainer([
+    'container.build_hash' => 'QfnW78b',
+    'container.build_id' => '7cb37aa7',
+    'container.build_time' => 1615545553,
+], __DIR__.\DIRECTORY_SEPARATOR.'ContainerQfnW78b');
+=======
+    \class_alias(\ContainerFLkc2gY\App_KernelDevDebugContainer::class, App_KernelDevDebugContainer::class, false);
+}
+
+return new \ContainerFLkc2gY\App_KernelDevDebugContainer([
+    'container.build_hash' => 'FLkc2gY',
+    'container.build_id' => '30dbfc78',
+    'container.build_time' => 1615545696,
+], __DIR__.\DIRECTORY_SEPARATOR.'ContainerFLkc2gY');
+>>>>>>> 66526da8a316f0c3d0145a4f7a1dde390b179655
+>>>>>>> b75410dc5fea4b6dede6fd83917da1143d6393c9
