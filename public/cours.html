@@ -348,7 +348,7 @@
                 },
                 methods: {
                     getClasses() {
-                        axios.get('/api/salles')
+                        axios.get('/api/classe')
                         .then(response => {
                             let classes = [{ id: "all", nom: "Toutes les classes" }]
                             response.data.forEach((classe) => {

@@ -5,6 +5,7 @@
 return [
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], []],
     'admin' => [[], ['_controller' => 'App\\Controller\\Admin\\DashboardController::index'], [], [['text', '/admin']], [], []],
+    'api_classe_index' => [[], ['_controller' => 'App\\Controller\\Api\\ClasseController::index'], [], [['text', '/api/classe']], [], []],
     'api_cours' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::index'], [], [['text', '/api/cours']], [], []],
     'api_coursby_classe' => [['id'], ['_controller' => 'App\\Controller\\Api\\CoursController::indexByClasse'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/cours/classe']], [], []],
     'api_cours_today' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::today'], [], [['text', '/api/cours/today']], [], []],
@@ -14,6 +15,7 @@ return [
     'api_cours_add_days' => [['nb_add_days'], ['_controller' => 'App\\Controller\\Api\\CoursController::addDays'], [], [['variable', '/', '[^/]++', 'nb_add_days', true], ['text', '/api/cours/days']], [], []],
     'api_cours_add_days_by_classe' => [['id', 'nb_add_days'], ['_controller' => 'App\\Controller\\Api\\CoursController::addDaysByClasse'], [], [['variable', '/', '[^/]++', 'nb_add_days', true], ['text', '/days'], ['variable', '/', '[^/]++', 'id', true], ['text', '/api/cours/classe']], [], []],
     'api_courscreate_cours' => [[], ['_controller' => 'App\\Controller\\Api\\CoursController::createCours'], [], [['text', '/api/cours']], [], []],
+    'api_matiere_index' => [[], ['_controller' => 'App\\Controller\\Api\\MatiereController::index'], [], [['text', '/api/matiere']], [], []],
     'api_professeurs_index' => [[], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], [], [['text', '/api/professeurs']], [], []],
     'api_professeurs_show' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::detail'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],
     'api_professeurs_index_avis' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::indexAvis'], [], [['text', '/avis'], ['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs']], [], []],
