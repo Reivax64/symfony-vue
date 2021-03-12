@@ -9,11 +9,13 @@ return [
     false, // $matchHost
     [ // $staticRoutes
         '/admin' => [[['_route' => 'admin', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
+        '/api/classe' => [[['_route' => 'api_classe_index', '_controller' => 'App\\Controller\\Api\\ClasseController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/cours' => [
             [['_route' => 'api_cours', '_controller' => 'App\\Controller\\Api\\CoursController::index'], null, ['GET' => 0], null, false, false, null],
             [['_route' => 'api_courscreate_cours', '_controller' => 'App\\Controller\\Api\\CoursController::createCours'], null, ['POST' => 0], null, false, false, null],
         ],
         '/api/cours/today' => [[['_route' => 'api_cours_today', '_controller' => 'App\\Controller\\Api\\CoursController::today'], null, ['GET' => 0], null, false, false, null]],
+        '/api/matiere' => [[['_route' => 'api_matiere_index', '_controller' => 'App\\Controller\\Api\\MatiereController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/professeurs' => [[['_route' => 'api_professeurs_index', '_controller' => 'App\\Controller\\Api\\ProfesseurController::index'], null, ['GET' => 0], null, false, false, null]],
         '/api/salles' => [[['_route' => 'api_cours_index', '_controller' => 'App\\Controller\\Api\\SalleController::index'], null, ['GET' => 0], null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
