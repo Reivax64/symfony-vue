@@ -9,3 +9,14 @@
 .modal-backdrop.fade {
     opacity:0.5;
 }
+
+.v-color-picker__controls {
+    padding: 0 !important;
+}
+
+.palet {
+    left: 50%; 
+    width: 100px; 
+    height: 50px;
+    position: relative;
+}

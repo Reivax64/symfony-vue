@@ -14,61 +14,81 @@
         <div id="App" class="container">
             <!-- Modal -->
             <modal id="modalCreateCours" title="Créer un cours" :submit="submitForm" ok="Créer un cours">
-                <div class="mb-5">
-                    <div class="form-group">
-                        <label>Matière</label>
-                        <select class="form-control" v-model="coursFormData.matiere" required>
-                            <option v-for="matiere in matieres" :key="matiere.id" :value="matiere.id">
-                                [{{ matiere.reference }}] {{ matiere.titre }}
-                            </option>
-                        </select>
-
-                        <label>Type</label>                                    
-                        <select class="form-control" v-model="coursFormData.type" required>
-                            <option>TP</option>
-                            <option>TD</option>
-                            <option>Cours</option>
-                        </select>
-
-                        <div class="form-group row">
-                            <div class="col-12 col-md-6">
-                                <label>Début</label>
-                                <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureDebut" id="example-datetime-local-input">
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label>Fin</label>
-                                <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureFin" id="example-datetime-local-input">
-                            </div>
+                <div class="mb-5 pl-2">
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>Matière</label>
+                            <select class="form-control" v-model="coursFormData.matiere" required>
+                                <option v-for="matiere in matieres" :key="matiere.id" :value="matiere.id">
+                                    [{{ matiere.reference }}] {{ matiere.titre }}
+                                </option>
+                            </select>
                         </div>
 
-                        <label>Salle</label>                                    
-                        <select class="form-control" v-model="coursFormData.salle" required>
-                            <option v-for="salle in salles" :key="salle.id" :value="salle.id">
-                                {{ salle.numero }}
-                            </option>
-                        </select>
+                        <div class="col">
+                            <label>Type</label>                                    
+                            <select class="form-control" v-model="coursFormData.type" required>
+                                <option>TP</option>
+                                <option>TD</option>
+                                <option>Cours</option>
+                            </select>
+                        </div>
+                    </div>
 
-                        <label>Professeur</label>                                    
-                        <select class="form-control" v-model="coursFormData.professeur" required>
-                            <option v-for="professeur in professeurs" :key="professeur.id" :value="professeur.id">
-                                {{ professeur | fullName }}
-                            </option>
-                        </select>
+                    <div class="form-group row">
+                        <div class="col-12 col-md-6">
+                            <label>Début</label>
+                            <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureDebut" id="example-datetime-local-input">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label>Fin</label>
+                            <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureFin" id="example-datetime-local-input">
+                        </div>
+                    </div>
 
-                        <label>Classe</label>                                
-                        <select class="form-control" v-model="coursFormData.classe" :disabled="currentClasse.id !== 'all'">
-                            <template v-for="classe in classes">
-                                {{classe.id === currentClasse.id}}
-                                <option 
-                                    v-if="classe.id !== 'all'" :key="classe.id" 
-                                    :selected="classe.id === currentClasse.id" :value="classe.id"
-                                >
-                                    {{ classe.nom }}
+                    <div class="form-group row">
+                        <div class="col-12 col-md-6">
+                            <label>Classe</label>                                
+                            <select class="form-control" v-model="coursFormData.classe" :disabled="currentClasse.id !== 'all'">
+                                <template v-for="classe in classes">
+                                    {{classe.id === currentClasse.id}}
+                                    <option 
+                                        v-if="classe.id !== 'all'" :key="classe.id" 
+                                        :selected="classe.id === currentClasse.id" :value="classe.id"
+                                    >
+                                        {{ classe.nom }}
+                                    </option>
+                                </template>
+                            </select>    
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label>Professeur</label>                                    
+                            <select class="form-control" v-model="coursFormData.professeur" required>
+                                <option v-for="professeur in professeurs" :key="professeur.id" :value="professeur.id">
+                                    {{ professeur | fullName }}
                                 </option>
-                            </template>
-                        </select>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12 col-md-6">
+                            <label>Salle</label>                                    
+                            <select class="form-control" v-model="coursFormData.salle" required>
+                                <option v-for="salle in salles" :key="salle.id" :value="salle.id">
+                                    {{ salle.numero }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="bg-color">Couleur de fond</label>
+                            <input class="form-control" type="color" id="head" name="bg-color" v-model="coursFormData.couleur">
+                        </div>
                     </div>
                 </div>
+
                 <v-alert v-show="errors.length" dismissible color="bg-danger" icon="mdi-alert-circle-outline" class="text-white" border="left" transition="scale-transition">
                     <div class="ml-3">
                         <p>Vous avez commis des erreurs !!</p>
@@ -308,7 +328,7 @@
                         dateHeureDebut: undefined,
                         dateHeureFin: undefined,
                         type: undefined,
-                        couleur:"#FFAAFF",
+                        couleur: undefined,
                         salle: undefined,
                         professeur: undefined,
                         matiere: undefined,
@@ -514,7 +534,7 @@
                         )
 
                         // Using the HSP value, determine whether the color is light or dark
-                        return hsp<127.5
+                        return hsp<150.5
                     },
                     colorAboutBG(bg) {
                         return bg 

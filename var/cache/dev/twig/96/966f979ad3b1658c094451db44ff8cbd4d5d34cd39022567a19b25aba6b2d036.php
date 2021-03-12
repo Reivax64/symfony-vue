@@ -56,7 +56,7 @@ class __TwigTemplate_c35e3efb24ba2b27f7f1a9ec19229c559b663e4fec90dbf1ab664237da0
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Home page";
+        echo "EDT - Accueil";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -71,13 +71,6 @@ class __TwigTemplate_c35e3efb24ba2b27f7f1a9ec19229c559b663e4fec90dbf1ab664237da0
 
         // line 6
         echo "
-<div ref=\"words\" data-words=\"";
-        // line 7
-        echo twig_escape_filter($this->env, twig_join_filter((isset($context["words"]) || array_key_exists("words", $context) ? $context["words"] : (function () { throw new RuntimeError('Variable "words" does not exist.', 7, $this->source); })()), ","), "html", null, true);
-        echo "\">
-
-</div>
-
 <div id=\"app\">
     <app></app>
 </div>
@@ -99,20 +92,16 @@ class __TwigTemplate_c35e3efb24ba2b27f7f1a9ec19229c559b663e4fec90dbf1ab664237da0
 
     public function getDebugInfo()
     {
-        return array (  76 => 7,  73 => 6,  66 => 5,  53 => 3,  36 => 1,);
+        return array (  73 => 6,  66 => 5,  53 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Home page{% endblock %}
+{% block title %}EDT - Accueil{% endblock %}
 
 {% block body %}
-
-<div ref=\"words\" data-words=\"{{ words|join(',') }}\">
-
-</div>
 
 <div id=\"app\">
     <app></app>
