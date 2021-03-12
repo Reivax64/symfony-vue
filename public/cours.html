@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Note ton prof</title>
+        <title>Emploi du temps</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -382,16 +382,6 @@
                             console.error(error)
                         })
                     },
-                    factorizeCoursToCalendar(cours) {
-                        return {
-                            id: cours.id,
-                            start: this.convertDateToCalendar(cours.dateHeureDebut),
-                            end: this.convertDateToCalendar(cours.dateHeureFin),
-                            color: cours.couleur || "gray",
-                            timed: true,
-                            properties: cours,
-                        }
-                    },
                     getSalles() {
                         axios.get("/api/salles")
                         .then(response => {
@@ -411,7 +401,7 @@
                         })
                     },
                     getMatieres() {
-                        axios.get("/api/matieres")
+                        axios.get("/api/matiere")
                         .then(response => {
                             this.matieres = response.data
                         })
@@ -424,8 +414,19 @@
                         this.getProfesseurs()
                         this.getMatieres()
                     },
+                    
+                    factorizeCoursToCalendar(cours) {
+                        return {
+                            id:     cours.id,
+                            start:  this.convertDateToCalendar(cours.dateHeureDebut),
+                            end:    this.convertDateToCalendar(cours.dateHeureFin),
+                            color:  cours.couleur || "gray",
+                            timed:  true,
+                            properties: cours,
+                        }
+                    },
 
-                    submitForm(evt) {    
+                    submitForm() {    
                         this.errors = []     
                         this.success = null
 
@@ -446,9 +447,7 @@
                         axios.post("/api/cours", formData)
                         .then(response => {
                             this.events.push(this.factorizeCoursToCalendar(response.data))
-                            console.log(this.success)
                             this.success = `Le cours de ${response.data.matiere.titre} a été créé avec succès!`
-                            console.log(this.success)
                         })
                         .catch(error => {
                             if (error.response && error.response.data instanceof Object) {
