@@ -308,21 +308,14 @@
                 data: {
                     focus: "",
                     currentClasse: { id: "all", nom: "Toutes les classes" },
-                    classes: [
-                        { id: "all", nom: "Toutes les classes" },
-                        { id: 1, nom: "LP PROG" },
-                        { id: 2, nom: "Littéraire" },
-                    ],
+                    classes: [{ id: "all", nom: "Toutes les classes" }],
                     salles: [],
                     professeurs: [],
+                    matieres: [],
                     typeSelected: { key: "day", name: "Jour" },
                     types: [
                         { key: "day", name: "Jour" },
                         { key: "week", name: "Semaine" },
-                    ],
-                    matieres: [
-                        { id: 1, titre: "Web Avancé", reference: "WA" },
-                        { id: 2, titre: "Philosophie", reference: "PH" },
                     ],
                     coursFormData: {
                         dateHeureDebut: undefined,
@@ -336,7 +329,6 @@
                     },
                     errors: [],
                     success: null,
-                    alert: true,
                     selectedEvent: {},
                     selectedElement: null,
                     selectedOpen: false,
@@ -344,6 +336,7 @@
                 },
 
                 mounted() {
+                    this.getClasses()
                     this.$refs.calendar.checkChange()
                 },
                 computed: {
@@ -354,6 +347,21 @@
                     }
                 },
                 methods: {
+                    getClasses() {
+                        axios.get('/api/salles')
+                        .then(response => {
+                            let classes = [{ id: "all", nom: "Toutes les classes" }]
+                            response.data.forEach((classe) => {
+                                classes.push(classe)
+                            })
+                            this.classes = classes
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
+
+
+                    },
                     getCours(paramDates) {
                         let paramClasse = this.currentClasse.id !== 'all'
                             ? '/classe/' + this.currentClasse.id
@@ -402,9 +410,19 @@
                             console.error(error)
                         })
                     },
+                    getMatieres() {
+                        axios.get("/api/matieres")
+                        .then(response => {
+                            this.matieres = response.data
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
+                    },
                     getDataToAddCours() {
                         this.getSalles()
                         this.getProfesseurs()
+                        this.getMatieres()
                     },
 
                     submitForm(evt) {    
