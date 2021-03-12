@@ -1,4 +1,61 @@
-# symfony-vue
+# Initialisation projet
+
+
+## Création base de donnée : 
+
+- Terminal dans la racine du projet : 
+
+**Lancer :** 
+php bin/console doctrine:database:create
+
+**puis :**
+php bin/console doctrine:schema:update --force 
+
+
+Une base de donnée au nom de "edt_remy_xavier_projet" sera alors créée. 
+
+## Puis lancer le serveur : 
+
+**allez dans (avec un terminal)**
+
+ /public 
+
+**lancer :** 
+
+php -S localhost:8022 (par exemple)
+
+
+Maintenant, allez sur votre navigateur, dans l'url http://localhost:8022/admin
+
+
+Créez au minimum 1 classe, 1 matière, 1 salle & 1 professeur
+
+
+Vous pouvez maintenant créer autant de cours que vous voulez en respectant certaine contrainte imposées par un Validator : 
+
+
+**Des cours à la même heure & date :**
+
+- Ne peuvent pas avoir le même prof
+
+- Ne peuvent pas avoir la même salle 
+
+- Ne peuvent pas avoir la même classe
+
+
+- Un professeur ne peut pas enseigner une matière qu'il ne possède pas 
+
+- Un cours ne peut pas être sur plusieurs jours
+- la date de début doit forcément être plus petite que celle de fin
+
+
+## Navigation : 
+
+
+Vous pouvez maintenant allez sur http://localhost:8022/cours.html et voir ainsi votre edt. 
+
+
+# Code : 
 
 ## Back Office
 

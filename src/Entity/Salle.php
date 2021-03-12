@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use App\Repository\SalleRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=SalleRepository::class)
+ * @UniqueEntity("numero")
  */
 class Salle implements \JsonSerializable
 {

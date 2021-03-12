@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ClasseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ClasseRepository::class)
+ * @UniqueEntity("nom")
  */
 class Classe implements \JsonSerializable
 {
@@ -18,7 +20,7 @@ class Classe implements \JsonSerializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", unique=true, length=255)
      */
     private $nom;
 
