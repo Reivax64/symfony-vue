@@ -13,10 +13,10 @@
     <body>
         <div id="App" class="container">
             <!-- Modal -->
-            <modal :submit="submitForm" ok="Créer un cours">
+            <modal id="modalCreateCours" title="Créer un cours" :submit="submitForm" ok="Créer un cours">
                 <div class="mb-5">
                     <div class="form-group">
-                        <label>Matière</label>                                    
+                        <label>Matière</label>
                         <select class="form-control" v-model="coursFormData.matiere" required>
                             <option v-for="matiere in matieres" :key="matiere.id" :value="matiere.id">
                                 [{{ matiere.reference }}] {{ matiere.titre }}
@@ -29,6 +29,17 @@
                             <option>TD</option>
                             <option>Cours</option>
                         </select>
+
+                        <div class="form-group row">
+                            <div class="col-12 col-md-6">
+                                <label>Début</label>
+                                <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureDebut" id="example-datetime-local-input">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label>Fin</label>
+                                <input class="form-control" type="datetime-local" v-model="coursFormData.dateHeureFin" id="example-datetime-local-input">
+                            </div>
+                        </div>
 
                         <label>Salle</label>                                    
                         <select class="form-control" v-model="coursFormData.salle" required>
@@ -45,18 +56,29 @@
                         </select>
 
                         <label>Classe</label>                                
-                        <select class="form-control" v-model="coursFormData.classe" disabled>
-                            <option selected :value="currentClasse.id">
-                                {{ currentClasse.nom }}
-                            </option>
+                        <select class="form-control" v-model="coursFormData.classe" :disabled="currentClasse.id !== 'all'">
+                            <template v-for="classe in classes">
+                                {{classe.id === currentClasse.id}}
+                                <option 
+                                    v-if="classe.id !== 'all'" :key="classe.id" 
+                                    :selected="classe.id === currentClasse.id" :value="classe.id"
+                                >
+                                    {{ classe.nom }}
+                                </option>
+                            </template>
                         </select>
                     </div>
                 </div>
-                <v-alert v-show="errors.length" color="bg-danger" icon="mdi-plus" class="text-white" border="left" transition="scale-transition">
-                    Vous avez commis des erreurs !!
-                    <ul>
-                        <li v-for="error in errors">{{ error }}</li>
-                    </ul>
+                <v-alert v-show="errors.length" dismissible color="bg-danger" icon="mdi-alert-circle-outline" class="text-white" border="left" transition="scale-transition">
+                    <div class="ml-3">
+                        <p>Vous avez commis des erreurs !!</p>
+                        <ul>
+                            <li v-for="error in errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                </v-alert>
+                <v-alert v-show="success" dismissible color="bg-success" icon="mdi-check-circle-outline" class="text-white" border="left" transition="scale-transition">
+                    <p class="ml-3">Super!</p>
                 </v-alert>
             </modal>
 
@@ -113,24 +135,15 @@
 
                         <div class="ml-auto btn-group">
                             <!-- Button trigger modal -->
-                            <v-btn class="bg-secondary text-white mr-3" elevation="10" x-small icon fab data-toggle="modal" data-target="#modalCalendar" @click.once="getDataToAddCours">
+                            <v-btn class="bg-secondary text-white mr-3" elevation="10" x-small icon fab data-toggle="modal" data-target="#modalCreateCours" @click.once="getDataToAddCours">
                                 <v-icon>mdi-plus</v-icon>
                             </v-btn>
-                            <v-btn
-                                outlined
-                                color="grey darken-2"
-                                class="dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                >
+                            <v-btn 
+                                outlined color="grey darken-2" 
+                                @click="typeSelected = typeSelected.key === 'day' ? typeSelected = types[1] : typeSelected= types[0]"
+                            >
                                 <span>{{ typeSelected.name }}</span>
                             </v-btn>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button 
-                                    v-for="type in types" :key="type.key" 
-                                    @click="typeSelected = type" 
-                                    class="dropdown-item" type="button"
-                                >{{type.name}}</button>
-                            </div>
                         </div>
                     </div>
                     
@@ -138,60 +151,57 @@
                         ref="calendar"
                         locale="fr"
                         :hide-header="false"
-                        :interval-height="40"
                         :interval-width="40"
                         :short-weekdays="false"
                         v-model="focus"
                         :events="events"
                         color="bg-primary"
                         event-overlap-mode="column"
-                        :event-color="getEventColor"
                         :type="typeSelected.key"
-                        :interval-minutes= 60 
-                        :first-interval= 7
-                        :interval-count= 12
-                        @click:event="showEvent"
-                        @click:more="viewDay"
+                        :interval-minutes="60" 
+                        :first-interval="7"
+                        :interval-count="12"
                         @click:date="viewDay"
                         @change="updateRange"
                     >
-                    <template v-slot:event="{ event, timed, eventSummary }">
+                    <template v-slot:event="{ event }">
                         <div
-                            :style="{backgroundColor: event.color, color: colorAboutBG(event.color)}"
-                            v-html="eventSummary()"
-                        ></div>
+                            :class="{'ml-md-3 mt-md-1': typeSelected.key === 'day'}"
+                            :style="{backgroundColor: event.color, color: colorAboutBG(event.color), height: '100%'}"
+                            data-toggle="modal" :data-target="'#cours-'+event.id"
+                        >
+                            {{ event.properties.matiere.titre }}<br />
+                            <div>{{ event.properties.type }} avec {{ event.properties.professeur | fullName }}</div>
+                            <div><i>{{ event.properties.dateHeureDebut | getTime }} - {{ event.properties.dateHeureFin | getTime }} | {{ event.properties.salle.numero }}</i></div>
+                        </div>
                     </template>
                     </v-calendar>
-                    <v-menu
-                        v-model="selectedOpen"
-                        :close-on-content-click="false"
-                        :activator="selectedElement"
-                        offset-x
+
+                    <modal 
+                        v-for="cours in events" :key="cours.id" 
+                        :id="'cours-'+cours.id"
+                        size="lg"
+                        modal-header-class="p-0"
+                        cancel="Retour"
+                        :ok="false"
                     >
+                        <template slot="modal-header">
+                            <v-toolbar :color="cours.color" :style="{color: colorAboutBG(cours.color)}" dark>
+                                <v-toolbar-title v-html="setViewCoursModalTitle(cours.properties)"></v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-btn icon data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </v-btn>
+                            </v-toolbar>
+                        </template>
                         <v-card
                             color="grey lighten-4"
                             min-width="350px"
                             flat
                         >
-                        <v-toolbar :color="selectedEvent.color" dark>
-                            <v-btn icon><v-icon>mdi-pencil</v-icon></v-btn>
-                            <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
-                            <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
-                        </v-toolbar>
-
-                        <v-card-text><span v-html="selectedEvent.details"></span></v-card-text>
-
-                        <v-card-actions>
-                            <v-btn
-                            text
-                            color="secondary"
-                            @click="selectedOpen = false"
-                            >Annuler</v-btn>
-                        </v-card-actions>
+                            <v-card-text><span v-html="setViewCoursModalDetails(cours.properties)"></span></v-card-text>
                         </v-card>
-                    </v-menu>
+                    </modal>
                 </div>
             </div>
         </div>
@@ -218,36 +228,50 @@
                 return fullNameArray.join(" ")
             })
 
+            Vue.filter('getTime', function (date) {
+                if ((typeof date !== 'string')) { 
+                    console.error("Le filtre getTime() doit s'appliquer sur un string, et non sur " + typeof date)
+                    return '' 
+                }
+
+                let timeArray = date.split(' ')[1].split(':')
+                let minute = timeArray[1] !== '00' ? timeArray[1] : ''
+                let time = timeArray[0] + 'h' + minute
+
+                return time
+            })
+
             Vue.component('modal', {
                 props: {
-                    ok: {
-                        type: String,
-                        default: "Valider"
-                    },
-                    cancel: {
-                        type: String,
-                        default: "Annuler"
-                    },
-                    submit: {
-                        type: Function,                        
-                    }
+                    id:     { type: String, default: 'modal-id' },
+                    size:   { type: String },
+                    title:  { type: String },
+                    ok:     { type: [String, Boolean], default: "Valider" },
+                    cancel: { type: [String, Boolean], default: "Annuler" },
+                    submit: { type: Function },
+                    modalHeaderClass: { type: String },
                 },
                 template: 
-                    `<div class="modal fade" id="modalCalendar" tabindex="-1" role="dialog" aria-labelledby="modalCalendar" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    `<div class="modal fade" :id="id" tabindex="-1" role="dialog" :aria-labelledby="id" aria-hidden="true" style="padding-top: 200px;">
+                    <div :class="['modal-dialog modal-dialog-centered', size ? 'modal-'+size : '']" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalCalendar">Ajouter un cours</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div :class="['modal-header', modalHeaderClass]">
+                                <slot name="modal-header">
+                                    <h5 class="modal-title">{{ title }}</h5>                    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </slot>
                             </div>
                             <div class="modal-body">
                                 <slot></slot>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ cancel }}</button>
-                                <button type="button" class="btn btn-primary" @click.prevent="submit">{{ ok }}</button>
+                                <button v-if="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">{{ cancel }}</button>
+                                <template v-if="ok">
+                                    <button v-if="submit" type="button" class="btn btn-primary" @click.prevent="submit">{{ ok }}</button>
+                                    <button v-else type="button" class="btn btn-primary" data-dismiss="modal">{{ ok }}</button>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -257,14 +281,12 @@
             var app = new Vue({
                 el:"#App",
                 vuetify: new Vuetify({
-                    lang: {
-                        current: 'fr',
-                    },
+                    lang: { current: 'fr' },
                 }),
                 
                 data: {
                     focus: "",
-                    currentClasse: { id: 1, nom: "LP PROG" },
+                    currentClasse: { id: "all", nom: "Toutes les classes" },
                     classes: [
                         { id: "all", nom: "Toutes les classes" },
                         { id: 1, nom: "LP PROG" },
@@ -276,15 +298,14 @@
                     types: [
                         { key: "day", name: "Jour" },
                         { key: "week", name: "Semaine" },
-                        { key: "month", name: "Mois" },
                     ],
                     matieres: [
                         { id: 1, titre: "Web Avancé", reference: "WA" },
                         { id: 2, titre: "Philosophie", reference: "PH" },
                     ],
                     coursFormData: {
-                        dateHeureDebut: "11-03-2021 15:00:00",
-                        dateHeureFin: "11-03-2021 17:00:00",
+                        dateHeureDebut: undefined,
+                        dateHeureFin: undefined,
                         type: undefined,
                         couleur:"#FFAAFF",
                         salle: undefined,
@@ -293,13 +314,12 @@
                         classe: undefined,
                     },
                     errors: [],
+                    success: null,
                     alert: true,
                     selectedEvent: {},
                     selectedElement: null,
                     selectedOpen: false,
                     events: [],
-                    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-                    names: ["Evenement"],
                 },
 
                 mounted() {
@@ -312,27 +332,36 @@
                             : "Classe de " + this.currentClasse.nom
                     }
                 },
-                methods:{
-                    getCours(period) {
-                        axios.get(`/api/cours/${period}`)
+                methods: {
+                    getCours(paramDates) {
+                        let paramClasse = this.currentClasse.id !== 'all'
+                            ? '/classe/' + this.currentClasse.id
+                            : ''
+                        let urlParam = paramClasse + paramDates
+
+                        axios.get(`/api/cours${urlParam}`)
                         .then(response => {
                             let cours = response.data
                             let events = []
 
                             cours.forEach(element => {                             
-                                events.push({
-                                    name: `[${element.matiere.reference}] ${element.matiere.titre} ${element.type} ${element.salle.numero} ${this.$options.filters.fullName(element.professeur)}`,
-                                    start: this.convertirDate(element.dateHeureDebut),
-                                    end: this.convertirDate(element.dateHeureFin),
-                                    color: element.couleur || "#fff",
-                                    timed: true,
-                                })
+                                events.push(this.factorizeCoursToCalendar(element))
                             })
                             this.events = events
                         })
                         .catch(error => {
-                            console.log(error)
+                            console.error(error)
                         })
+                    },
+                    factorizeCoursToCalendar(cours) {
+                        return {
+                            id: cours.id,
+                            start: this.convertDateToCalendar(cours.dateHeureDebut),
+                            end: this.convertDateToCalendar(cours.dateHeureFin),
+                            color: cours.couleur || "gray",
+                            timed: true,
+                            properties: cours,
+                        }
                     },
                     getSalles() {
                         axios.get("/api/salles")
@@ -340,7 +369,7 @@
                             this.salles = response.data
                         })
                         .catch(error => {
-                            console.log(error)
+                            console.error(error)
                         })
                     },
                     getProfesseurs() {
@@ -349,7 +378,7 @@
                             this.professeurs = response.data
                         })
                         .catch(error => {
-                            console.log(error)
+                            console.error(error)
                         })
                     },
                     getDataToAddCours() {
@@ -358,9 +387,8 @@
                     },
 
                     submitForm(evt) {    
-                        this.errors = []
-                        // dateHeureDebut: "11-03-2021 15:00:00",
-                        // dateHeureFin: "11-03-2021 17:00:00",      
+                        this.errors = []     
+                        this.success = null
 
                         if (!this.coursFormData.type) this.errors.push("Le type de cours est requis")
                         if (!this.coursFormData.salle) this.errors.push("La salle de cours est requise")
@@ -372,17 +400,42 @@
                     },
 
                     postCours() {
-                        axios.post("/api/cours/", this.coursFormData)
+                        let formData = { ...this.coursFormData }
+                        formData.dateHeureDebut = this.convertDateToBDD(formData.dateHeureDebut)
+                        formData.dateHeureFin = this.convertDateToBDD(formData.dateHeureFin)
+
+                        axios.post("/api/cours", formData)
                         .then(response => {
-                            this.avis.push(response.data);
-                            this.nouvelAvis = this.newAvis();
+                            this.events.push(this.factorizeCoursToCalendar(response.data))
+                            console.log(this.success)
+                            this.success = `Le cours de ${response.data.matiere.titre} a été créé avec succès!`
+                            console.log(this.success)
                         })
                         .catch(error => {
-                            // this.errors = Object.values(error.response.data);
+                            if (error.response && error.response.data instanceof Object) {
+                                this.errors = Object.values(error.response.data)
+                            }                            
                         })
                     },
 
-                    convertirDate(date) {
+                    convertDateToBDD(date) {
+                        let arrayDate = date.split("T")
+                        let day = arrayDate[0]
+                        let time = arrayDate[1]
+                        
+                        day = day.split("-").reverse().join("-")
+                        time += ":00"
+                        let result = day + " " + time
+                        
+                        return result
+                    },
+
+                    convertDateToCalendar(date) {
+                        if (!date) {
+                            console.error("convertDateToCalendar() doit recevoir en paramètre un string, il obtient " + typeof date)
+                            return ""
+                        }
+
                         let arrayDate = date.split(" ")
                         let day = arrayDate[0]
                         let time = arrayDate[1]
@@ -391,14 +444,27 @@
                         day = day.split("-").reverse().join("-")
                         return day + time
                     },
+                    setViewCoursModalTitle(cours) {
+                        return `<strong>[${cours.matiere.reference}]</strong> ${cours.matiere.titre} - ${cours.type}`
+                    },
+                    setViewCoursModalDetails(cours) {
+                        const day = cours.dateHeureDebut.split(' ')[0].split('-').join('/')
+                        return `
+                            <div class="row">
+                                <div class="col-md-4"><strong>Professeur:</strong></div>
+                                <div class="col-md-8">${this.$options.filters.fullName(cours.professeur)}</div>
+                                <div class="col-md-4"><strong>Date:</strong></div>
+                                <div class="col-md-8">Le ${day}, de ${this.$options.filters.getTime(cours.dateHeureDebut)} à ${this.$options.filters.getTime(cours.dateHeureFin)}</div>
+                                <div class="col-md-4"><strong>Salle:</strong></div>
+                                <div class="col-md-8">${cours.salle.numero}</div>
+                            </div>
+                        `
+                    },
 
                     // Vuetify
                     viewDay ({ date }) {
                         this.focus = date
                         this.typeSelected = { key: "day", name: "Jour" }
-                    },
-                    getEventColor (event) {
-                        return event.color
                     },
                     setToday () {
                         this.focus = ''
@@ -409,28 +475,10 @@
                     next () {
                         this.$refs.calendar.next()
                     },
-                    showEvent ({ nativeEvent, event }) {
-                        const open = () => {
-                            this.selectedEvent = event
-                            this.selectedElement = nativeEvent.target
-                            setTimeout(() => {
-                                this.selectedOpen = true
-                            }, 10)
-                        }
-
-                        if (this.selectedOpen) {
-                            this.selectedOpen = false
-                            setTimeout(open, 10)
-                        } else {
-                            open()
-                        }
-
-                        nativeEvent.stopPropagation()
-                    },
                     updateRange ({ start, end }) {
-                        let dateStartFR = this.convertirDate(start.date)
-                        let dateEndFR = this.convertirDate(end.date)
-                        let urlParam = `between/${dateStartFR}/${dateEndFR}`
+                        let dateStartFR = this.convertDateToCalendar(start.date)
+                        let dateEndFR = this.convertDateToCalendar(end.date)
+                        let urlParam = `/between/${dateStartFR}/${dateEndFR}`
 
                         this.getCours(urlParam)
                     },
@@ -475,12 +523,14 @@
                 },
 
                 watch: {
-                    currentClasse: {
-                        handler: function(newCurrentClasse) {
-                            this.coursFormData.classe = newCurrentClasse.id
-                        },
-                        immediate: true,
-                    }
+                    currentClasse() {
+                        this.coursFormData.classe = this.currentClasse.id
+                        let date = {
+                            start:  this.$refs.calendar.lastStart,
+                            end:    this.$refs.calendar.lastEnd
+                        }
+                        this.updateRange(date)
+                    },
                 }
             });
         </script>

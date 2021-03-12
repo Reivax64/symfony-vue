@@ -1,11 +1,11 @@
-.theme--light.v-btn.v-btn--has-bg  {
-    /* background-color: blue; */
-}
-
-.bg-primary {
+.bg-primary, .btn-primary, .btn-secondary {
     color: white !important;
 }
 
 .v-alert__border--left {
     left: 0;
+}
+
+.modal-backdrop.fade {
+    opacity:0.5;
 }
