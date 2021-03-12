@@ -344,6 +344,7 @@
                 },
 
                 mounted() {
+                    this.getClasses()
                     this.$refs.calendar.checkChange()
                 },
                 computed: {
@@ -354,6 +355,21 @@
                     }
                 },
                 methods: {
+                    getClasses() {
+                        axios.get('/api/cours')
+                        .then(response => {
+                            let classes = { id: "all", nom: "Toutes les classes" }
+                            response.forEach((classe) => {
+                                classes.push(classe)
+                            })
+                            this.classes = classes
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
+
+
+                    },
                     getCours(paramDates) {
                         let paramClasse = this.currentClasse.id !== 'all'
                             ? '/classe/' + this.currentClasse.id
