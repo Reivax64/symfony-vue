@@ -24,7 +24,6 @@ return [
     'api_professeurs_update_avis' => [['id'], ['_controller' => 'App\\Controller\\Api\\ProfesseurController::updateAvis'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/professeurs/avis']], [], []],
     'api_cours_index' => [[], ['_controller' => 'App\\Controller\\Api\\SalleController::index'], [], [['text', '/api/salles']], [], []],
     'api_cours_detail' => [['id'], ['_controller' => 'App\\Controller\\Api\\SalleController::detail'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/salles']], [], []],
-    'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], []],
     'professeurs_index' => [[], ['_controller' => 'App\\Controller\\ProfesseurController::index'], [], [['text', '/professeurs']], [], []],
     'professeurs_create' => [[], ['_controller' => 'App\\Controller\\ProfesseurController::create'], [], [['text', '/professeurs/create']], [], []],
     'professeurs_update' => [['id'], ['_controller' => 'App\\Controller\\ProfesseurController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/professeurs/update']], [], []],

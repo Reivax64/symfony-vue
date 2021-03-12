@@ -314,13 +314,6 @@
         <argument type="service" id=".service_locator.5nX7ca3.App\Controller\Api\SalleController"/>
       </call>
     </service>
-    <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.5nX7ca3.App\Controller\HomeController"/>
-      </call>
-    </service>
     <service id="App\Controller\ProfesseurController" class="App\Controller\ProfesseurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -4668,9 +4661,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Api\SalleController" class="App\Controller\Api\SalleController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Api\SalleController" class="App\Controller\Api\SalleController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Api\SalleController" class="App\Controller\Api\SalleController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProfesseurController" class="App\Controller\ProfesseurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProfesseurController" class="App\Controller\ProfesseurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ProfesseurController" class="App\Controller\ProfesseurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5800,12 +5790,6 @@
     <service id=".service_locator.5nX7ca3.App\Controller\Api\SalleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\Api\SalleController"/>
       <argument>App\Controller\Api\SalleController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.5nX7ca3" method="withContext"/>
-    </service>
-    <service id=".service_locator.5nX7ca3.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
-      <argument>App\Controller\HomeController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.5nX7ca3" method="withContext"/>
     </service>
